@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import pageobject.JobConfiguration;
 import pageobject.Page;
 import pageobject.jobsOverview.SomeJobPage;
 
@@ -76,45 +77,47 @@ public class AddNewJobMo extends Page {
         super(webDriver);
     }
 
-    public SomeJobPage createJob(String numberOfClients, String createOrExisted, String typeOfJobDuration, String typeOfWorkflow, String jobnaMe) throws NoSuchMethodError {
+    public SomeJobPage createJob(JobConfiguration config, String jobnaMe) throws NoSuchMethodError {
 
     // Process of choosing client, we can choose one client or two clients also we check if 'choose client' field empty, because if we click
     // add new job from some client page it will be already configured first client
 
-        if (createOrExisted.trim().equalsIgnoreCase("exist") && chooseClientFirst.getAttribute("class").endsWith("ng-empty")) {
+        if (config.getCreateOrExisted().equals("exist") && chooseClientFirst.getAttribute("class").endsWith("ng-empty")) {
             choosePrimaryClient();
-            if (numberOfClients.trim().equalsIgnoreCase("two")){
+            if (config.getNumberOfClients().equals("two")){
                 chooseSecCllient();
             }
 
     // Process of creating new client, we can create one client or two clients also we check if 'choose client' field empty, because if we click
     // add new job from some client page it will be already configured first client
 
-        } else if (createOrExisted.trim().equalsIgnoreCase("new") && chooseClientFirst.getAttribute("class").endsWith("ng-empty")) {
+        } else if (config.getCreateOrExisted().equals("new") && chooseClientFirst.getAttribute("class").endsWith("ng-empty")) {
             createNewClient().createNewClient();
-            if (numberOfClients.trim().equalsIgnoreCase("two")){
+            if (config.getNumberOfClients().equals("two")){
                 createNewSecondaryClient().createNewClient();
             }
         }
 
     // Process of choosing type of workflow, we have two position - created workflow OR default
 
-        if (typeOfWorkflow.trim().equalsIgnoreCase("create")){
+        if (config.getTypeOfWorkflow().equals("created")){
             selectCreatedWorkflow();
         }
 
     // Process configuration of day duration, we have three options - job with 'all day' duration, job planed on some time and job with out date
     //
 
-        if (typeOfJobDuration.trim().equalsIgnoreCase("all day")){
+        if (config.getTypeOfJobDuration().equals("all day")){
             chooseTodayDay();
             clickOnElement(allDateCheckBox);
-        } else if (typeOfJobDuration.trim().equalsIgnoreCase("time")){
+        } else if (config.getTypeOfJobDuration().equals("time")){
             chooseTodayDay();
             clickOnElement(timeFrom);
-        } else if (typeOfJobDuration.trim().equalsIgnoreCase("no date")){
+        } else if (config.getTypeOfJobDuration().equals("no date")){
             clickOnElement(noDateCheckBox);
-        } else {throw new NoSuchMethodError();}
+        } else {
+            throw new NoSuchMethodError();
+        }
 
     // Random string will be set on field 'Location' & 'Notes'
 
@@ -124,8 +127,12 @@ public class AddNewJobMo extends Page {
     // Save current Job
 
         clickOnElement(saveJob);
-        try {Thread.sleep(1000);}
-        catch (InterruptedException e) {e.printStackTrace();}
+        try {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return PageFactory.initElements(webDriver, SomeJobPage.class);
     }

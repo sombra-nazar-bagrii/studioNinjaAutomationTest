@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import Factory.JobConfigurationFactory;
 import pageobject.Page;
 import pageobject.jobsOverview.SomeJobPage;
 import pageobject.modalForms.AddNewClientMo;
@@ -115,10 +116,7 @@ public class SomeClient extends Page {
         if (jobs.size() == 0){
             System.out.println("This user haven't any job");
             addNewJob().createJob(
-                    numberOfClients,
-                    createOrExisted,
-                    typeOfJobDuration,
-                    typeOfWorkflow,
+                    JobConfigurationFactory.getConfiguration("conf1"),
                     "Job from client page");
         }
         return PageFactory.initElements(webDriver, SomeJobPage.class);

@@ -19,11 +19,9 @@ import java.util.Random;
 public abstract class Page {
     protected WebDriver webDriver;
     protected String tempEmail;
-    public final static String numberOfClients = "two";
-    public final static String createOrExisted = "new";
-    public final static String typeOfJobDuration = "time";
-    public final static String typeOfWorkflow = "create";
-    public final static String CLIENT_NAME = "Test";
+
+    protected final String CLIENT_NAME = "Test";
+    protected final boolean modalsWithCC = true;
 
     @FindBy(xpath = "//div[contains(@id,'taTextElement')]/p")
     private WebElement angularFirstP;

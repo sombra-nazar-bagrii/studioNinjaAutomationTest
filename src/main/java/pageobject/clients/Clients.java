@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import pageobject.Page;
 import pageobject.modalForms.AddNewClientMo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,18 +46,22 @@ public class Clients extends Page {
     }
 
     public SendEmailFromClients goToSendEmailMo(){
-        sendKeysToSearchInput(CLIENT_NAME);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        waitForElement(firstRowInSearchArea, webDriver,10);
-        clickOnElement(firstRowInSearchArea.findElement(By.xpath(".//a[starts-with(@ng-href, '/clients/client')]")));
+        openPage(".//a[starts-with(@ng-href, '/clients/client')]");
         return PageFactory.initElements(webDriver, SendEmailFromClients.class);
     }
 
     public SomeClient goToSomeClientPage(){
+        openPage(".//a[starts-with(@ng-href, '/clients/client')]");
+        return PageFactory.initElements(webDriver, SomeClient.class);
+    }
+/*
+    public <T extends WebElement> void goSome(T tClass){
+        if (tClass instanceof SendEmailFromClients){
+
+        }
+    }
+*/
+    public void openPage(final String path){
         sendKeysToSearchInput(CLIENT_NAME);
         try {
             Thread.sleep(3000);
@@ -64,10 +69,8 @@ public class Clients extends Page {
             e.printStackTrace();
         }
         waitForElement(firstRowInSearchArea, webDriver,10);
-        clickOnElement(firstRowInSearchArea.findElement(By.xpath(".//a[starts-with(@ng-href, '/clients/client')]")));
-        return PageFactory.initElements(webDriver, SomeClient.class);
+        clickOnElement(firstRowInSearchArea.findElement(By.xpath(path)));
     }
-
 
 
     public void verifyThatSearchIsWorking(String textForValidation){
