@@ -1,7 +1,6 @@
 package tests;
 
 import org.testng.annotations.Test;
-import pageobject.Page;
 
 /**
  * Created by sombra-15 on 14.09.17.
@@ -12,7 +11,9 @@ public class CreateClient extends TestBase {
     public void createClientFromClients(){
         startPage.goToClientsSection()
                 .addNewClient()
-                .createNewClient()
+                .createNewClient(
+
+                )
                 .goToSomeClientPage();
     }
 
@@ -20,7 +21,9 @@ public class CreateClient extends TestBase {
     public void createClientAndEdit(){
         startPage.goToClientsSection()
                 .addNewClient()
-                .createNewClient()
+                .createNewClient(
+
+                )
                 .goToSomeClientPage()
                 .editClientInfo();
     }

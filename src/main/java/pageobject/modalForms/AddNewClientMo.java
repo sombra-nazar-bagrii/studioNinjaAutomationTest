@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pageobject.ClientConfiguration;
 import pageobject.Page;
 import pageobject.clients.Clients;
-import pageobject.clients.SomeClient;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * Created by sombra-15 on 09.09.17.
  */
 public class AddNewClientMo extends Page {
-    private final String isClientCompany = "No";
+    private final String isClientCompany = "Yes";
 
     @FindBy(xpath = ".//*[@ng-model = 'companyNameChecked']/following-sibling::label")
     private WebElement clientIsACompanyBox;
@@ -51,6 +51,9 @@ public class AddNewClientMo extends Page {
     @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[1]")
     private WebElement notes;
 
+    @FindBy(xpath = "(.//*[@ng-model='client.companyName'])[1]")
+    private WebElement company;
+
     @FindBy(xpath = ".//*[contains(text(), 'Save client profile')]")
     private WebElement saveClient;
 
@@ -59,16 +62,18 @@ public class AddNewClientMo extends Page {
         super(webDriver);
     }
 
-    private static int count = 1;
-
     public Clients createNewClient() {
-        List<WebElement> list = Arrays.asList(lastName, phone, street, town, postcode, state, country, notes);
+        List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country, notes);
         if (isClientCompany.trim().equalsIgnoreCase("Yes")) {
             clickOnElement(clientIsACompanyBox);
+            customClearAndSendValue(company, ClientConfiguration.getFirstName());
         }
-        customClearAndSendValue(firstName, CLIENT_NAME + count++);
-        customClearAndSendValue(email, CLIENT_NAME + "@" + generateString().toLowerCase() + ".com");
-        generateValuesForAll(list);
+        setAllValuesForAllElements(
+                list,
+                ClientConfiguration.getAllValues());
+        customClearAndSendValue(
+                email,
+                ClientConfiguration.getFirstName() + "@" + ClientConfiguration.getLastName() + ".com");
         clickOnElement(saveClient);
         return PageFactory.initElements(webDriver, Clients.class);
     }

@@ -13,7 +13,7 @@ public class CreateJob extends TestBase{
         startPage.goToDashboard()
                 .createNewJob()
                 .createJob(
-                        JobConfigurationFactory.getConfiguration("default"),
+                        JobConfigurationFactory.getConfiguration("JobConf1"),
                         "Job from dashboard");
     }
 /*
@@ -31,7 +31,7 @@ public class CreateJob extends TestBase{
         startPage.goToJobsOverviewSection()
                 .addNewJob()
                 .createJob(
-                        JobConfigurationFactory.getConfiguration("conf2"),
+                        JobConfigurationFactory.getConfiguration("JobConf2"),
                         "Job from jobs overview");
     }
 
@@ -49,7 +49,7 @@ public class CreateJob extends TestBase{
                 .goToSomeClientPage()
                 .addNewJob()
                 .createJob(
-                        JobConfigurationFactory.getConfiguration("conf3"),
+                        JobConfigurationFactory.getConfiguration("JobConf3"),
                         "Job from client page");
     }
 

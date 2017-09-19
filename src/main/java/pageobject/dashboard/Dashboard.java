@@ -76,6 +76,23 @@ public class Dashboard extends Page {
         clickOnElement(addAppointment);
         return PageFactory.initElements(webDriver, AddNewAppointmentMo.class);
     }
+/*
+    public boolean checkIfUpcomingSectionWorks(){
 
+    }
 
+    public boolean checkIfJobWorkflowSectionWorks(){
+
+    }
+
+    public boolean checkIfPaymentSectionWorks(){
+
+    }
+*/
+    public void checkAllStatesOfHeaderDropBoxes(){
+        checkAllSelectedOptions(leadsSelect);
+        checkAllSelectedOptions(acceptedSelect);
+        checkAllSelectedOptions(scheduledSelect);
+        checkAllSelectedOptions(totalInvoiced);
+    }
 }

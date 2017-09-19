@@ -25,42 +25,42 @@ public class JobConfigurationFactory {
     */
 
     public static JobConfiguration getConfiguration(final String nameConfiguration){
-        if ("conf1".equals(nameConfiguration)){
+        if ("JobConf1".equals(nameConfiguration)){
             return new JobConfiguration()
                     .setNumberOfClients("one")
                     .setCreateOrExisted("new")
                     .setTypeOfJobDuration("all day")
                     .setTypeOfWorkflow("default");
         }
-        if ("conf2".equals(nameConfiguration)){
+        if ("JobConf2".equals(nameConfiguration)){
             return new JobConfiguration()
                     .setNumberOfClients("one")
                     .setCreateOrExisted("exist")
                     .setTypeOfJobDuration("time")
                     .setTypeOfWorkflow("created");
         }
-        if ("conf3".equals(nameConfiguration)){
+        if ("JobConf3".equals(nameConfiguration)){
             return new JobConfiguration()
                     .setNumberOfClients("one")
                     .setCreateOrExisted("exist")
                     .setTypeOfJobDuration("no date")
                     .setTypeOfWorkflow("default");
         }
-        if ("conf4".equals(nameConfiguration)){
+        if ("JobConf4".equals(nameConfiguration)){
             return new JobConfiguration()
                     .setNumberOfClients("two")
                     .setCreateOrExisted("exist")
                     .setTypeOfJobDuration("all day")
                     .setTypeOfWorkflow("created");
         }
-        if ("conf5".equals(nameConfiguration)){
+        if ("JobConf5".equals(nameConfiguration)){
             return new JobConfiguration()
                     .setNumberOfClients("two")
                     .setCreateOrExisted("new")
                     .setTypeOfJobDuration("time")
                     .setTypeOfWorkflow("default");
         }
-        if ("conf6".equals(nameConfiguration)){
+        if ("JobConf6".equals(nameConfiguration)){
             return new JobConfiguration()
                     .setNumberOfClients("two")
                     .setCreateOrExisted("new")

@@ -11,6 +11,8 @@ import pageobject.header.Header;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by sombra17 on 09.12.16.
@@ -135,6 +137,14 @@ public abstract class Page {
         new Select(element).selectByIndex(index);
     }
 
+    protected void checkAllSelectedOptions(WebElement element){
+        Select sel = new Select(element);
+        for(int i = 0; i < sel.getOptions().size(); i ++){
+            customSelectByIndex(element, i);
+            webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        }
+    }
+
     protected void waitForElement(WebElement element, WebDriver driver, int seconds){
         WebDriverWait wait = new WebDriverWait(driver,seconds);
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -164,6 +174,12 @@ public abstract class Page {
     protected void generateValuesForAll(List<WebElement> n){
         for (WebElement count: n) {
             customClearAndSendValue(count, generateString());
+        }
+    }
+
+    protected void setAllValuesForAllElements(List<WebElement> element, List<String> value){
+        for(int i =0; i <element.size(); i++){
+            customClearAndSendValue(element.get(i), value.get(i));
         }
     }
 

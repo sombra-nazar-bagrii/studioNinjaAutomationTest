@@ -26,7 +26,7 @@ public class CreateUser extends TestBase {
         }
     }
 
-    @Test ( enabled = true)
+    @Test (enabled = true)
     public void logInByExistedUser(){
         try {
             startPage2.enterByExistingUser(EMAIL, PASSWORD);
