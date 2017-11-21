@@ -30,6 +30,9 @@ public class SingIn extends Page {
     @FindBy(xpath = ".//*[@class = 'forgot-password']")
     private WebElement forgotPassword;
 
+    @FindBy(xpath = "//*[@id = 'checkbox-squared-stay-signed-in']/following-sibling::label")
+    private WebElement staySignedIn;
+
     @FindBy(xpath = ".//*[@data-autotest-link='signUp']")
     private WebElement singUpButton;
 
@@ -43,6 +46,7 @@ public class SingIn extends Page {
     public void enterByExistingUser(String mail, String pass){
         customClearAndSendValue(email, mail);
         customClearAndSendValue(password, pass);
+        clickOnElement(staySignedIn);
          try {
             singInButton.click();
         } catch (Exception e){

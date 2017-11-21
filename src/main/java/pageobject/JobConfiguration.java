@@ -12,7 +12,6 @@ public class JobConfiguration {
     private boolean modalsWithCC = true;
 
     public JobConfiguration(){
-
     }
 
     public String getNumberOfClients() {
@@ -62,7 +61,6 @@ public class JobConfiguration {
     public JobConfiguration setCLIENT_NAME(String CLIENT_NAME) {
         this.CLIENT_NAME = CLIENT_NAME;
         return this;
-
     }
 
     public JobConfiguration setModalsWithCC(boolean modalsWithCC) {

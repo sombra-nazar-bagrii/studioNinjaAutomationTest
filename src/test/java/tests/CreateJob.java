@@ -8,7 +8,7 @@ import Factory.JobConfigurationFactory;
  */
 public class CreateJob extends TestBase{
 
-    @Test(priority = 1, enabled = false)
+    @Test(priority = 1, enabled = true)
     public void jobFromDashboard(){
         startPage.goToDashboard()
                 .createNewJob()
@@ -16,17 +16,8 @@ public class CreateJob extends TestBase{
                         JobConfigurationFactory.getConfiguration("JobConf1"),
                         "Job from dashboard");
     }
-/*
-    @Test(priority = 1, enabled = false)
-    public void jobFromDashboard(){
-        startPage.goToDashboard()
-                .createNewJob()
-                .createJob(
-                        JobConfigurationFactory.getConfiguration("config2"),
-                        "Job from dashboard");
-    }
-*/
-    @Test (priority = 2, enabled = false)
+
+    @Test (priority = 2, enabled = true)
     public void jobFromJobsSection(){
         startPage.goToJobsOverviewSection()
                 .addNewJob()
@@ -57,4 +48,15 @@ public class CreateJob extends TestBase{
     public void jobFromClientEmail(){
         startPage.goToClientsSection();
     }
+
+    /*
+    @Test(priority = 1, enabled = false)
+    public void jobFromDashboard(){
+        startPage.goToDashboard()
+                .createNewJob()
+                .createJob(
+                        JobConfigurationFactory.getConfiguration("config2"),
+                        "Job from dashboard");
+    }
+*/
 }

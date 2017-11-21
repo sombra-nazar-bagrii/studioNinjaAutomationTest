@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
  */
 
 public class CreateUser extends TestBase {
-    private static String EMAIL = "posya.klyueva@gmail.com";
+    private static String EMAIL = "waruxu@morsin.com";
     private static String PASSWORD = "qweqwe";
 
     @Test (priority = 1, enabled = false)
@@ -16,7 +16,7 @@ public class CreateUser extends TestBase {
         Assert.assertTrue(startPage2.checkIfErrorMessageCorrect(EMAIL, PASSWORD));
     }
 
-    @Test (priority = 2, enabled = false)
+    @Test (priority = 0, enabled = true)
     public void verifyIfWeCanRegistrationProcess(){
         try{
             startPage2.openSingUpPage().singUpNewUser();
@@ -26,7 +26,7 @@ public class CreateUser extends TestBase {
         }
     }
 
-    @Test (enabled = true)
+    @Test (priority = 0, enabled = false)
     public void logInByExistedUser(){
         try {
             startPage2.enterByExistingUser(EMAIL, PASSWORD);

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import pageobject.ClientConfiguration;
 import pageobject.Page;
 import pageobject.clients.Clients;
+import pageobject.clients.SomeClient;
 
 import java.util.Arrays;
 import java.util.List;
@@ -73,8 +74,24 @@ public class AddNewClientMo extends Page {
                 ClientConfiguration.getAllValues());
         customClearAndSendValue(
                 email,
-                ClientConfiguration.getFirstName() + "@" + ClientConfiguration.getLastName() + ".com");
+                ClientConfiguration.getFirstName().replaceAll(" ","") + "@" + ClientConfiguration.getLastName() + ".com");
         clickOnElement(saveClient);
         return PageFactory.initElements(webDriver, Clients.class);
+    }
+
+    public SomeClient editClientInformation(){
+        List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country, notes);
+        if (isClientCompany.trim().equalsIgnoreCase("Yes")) {
+            clickOnElement(clientIsACompanyBox);
+            customClearAndSendValue(company, ClientConfiguration.getFirstName());
+        }
+        setAllValuesForAllElements(
+                list,
+                ClientConfiguration.getAllValues());
+        customClearAndSendValue(
+                email,
+                ClientConfiguration.getFirstName() + "@" + ClientConfiguration.getLastName() + ".com");
+        clickOnElement(saveClient);
+        return PageFactory.initElements(webDriver, SomeClient.class);
     }
 }

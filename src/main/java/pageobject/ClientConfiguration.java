@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class ClientConfiguration {
 
-    private static final List<String> firstName = Arrays.asList("Nazar", "Oleh", "Tania", "Andrew", "Vlad", "Roksolana", "Olia");
+    private static final List<String> firstName = Arrays.asList("Test Nazar", "Test Oleh", " Test Tania", "Test Andrew", "Test Vlad", "Test Roksolana", "Test Olia");
     private static final List<String> lastName = Arrays.asList("Smit", "Ivanov", "Papka", "Batia", "Petrov", "Jones");
     private static final List<String> phone = Arrays.asList("02589462", "5463156", "8746513", "6987446");
     private static final List<String> street = Arrays.asList("Pid Dubom", "Zamarstynivska", "Ugorska", "Gorodotska");
@@ -17,7 +17,7 @@ public class ClientConfiguration {
     private static final List<String> country = Arrays.asList("Ukraine", "Russia", "Poland");
     private static final List<String> notes = Arrays.asList("bla bla bla", "Some notes");
 
-    static Random rand = new Random();  // ??
+    static Random rand = new Random();
 
     public ClientConfiguration() {
     }

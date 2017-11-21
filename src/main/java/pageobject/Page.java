@@ -9,7 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageobject.header.Header;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Stack;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 public abstract class Page {
     protected WebDriver webDriver;
     protected String tempEmail;
+    FileInputStream file;
+    Properties property = new Properties();
 
     protected final String CLIENT_NAME = "Test";
     protected final boolean modalsWithCC = true;
@@ -112,6 +118,10 @@ public abstract class Page {
         } catch (NoSuchElementException e) {
             return false;
         }
+    }
+
+    protected void waitSomeSec(WebDriver driver, int sec){
+        driver.manage().timeouts().implicitlyWait(sec, TimeUnit.SECONDS);
     }
 
     protected String containsAttribute (WebElement element, String attribute){

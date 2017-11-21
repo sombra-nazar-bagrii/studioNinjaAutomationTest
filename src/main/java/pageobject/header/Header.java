@@ -1,5 +1,6 @@
 package pageobject.header;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,8 +37,20 @@ public class Header extends Page {
     @FindBy(xpath = "//a[@data-autotest-section='paymentsComputer']")//+
     private  WebElement payments;
 
+    @FindBy(xpath = "//*[@class='selected-menu']//span[2]")
+    private WebElement selectedSection;
+
+    @FindBy(xpath = "")
+    private WebElement dropDown;
+
     @FindBy(xpath = "//a[@data-link='logout']")
     private WebElement logoutLink;
+
+    @FindBy(xpath = "")
+    private WebElement accountAndSub;
+
+    @FindBy(xpath = "")
+    private WebElement help;
 
     public Header(WebDriver webDriver) {
         super(webDriver);
@@ -83,6 +96,10 @@ public class Header extends Page {
         waitForElement(logoutLink, webDriver, 10);
         clickOnElement(logoutLink);
         return PageFactory.initElements(webDriver, SingIn.class);
+    }
+
+    public String whichSectionIsSelected(){
+        return selectedSection.getText();
     }
 
 }

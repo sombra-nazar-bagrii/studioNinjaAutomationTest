@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import pageobject.Page;
 import pageobject.dashboard.Dashboard;
 import pageobject.singIn.SingIn;
@@ -37,7 +38,6 @@ public class SingUp extends Page {
 
      @FindBy(xpath = ".//*[@data-autotest-select='timezone']")
      private WebElement timezone;
-     //Select timezone = new Select(timezoneForSelect);
 
      @FindBy(xpath = ".//*[@data-autotest-checkbox='checkbox']")
      private WebElement termsAndPolicyCheckBox;
@@ -54,7 +54,7 @@ public class SingUp extends Page {
      private static String TEMP_MAIL = "https://temp-mail.org/uk/";
      private static String LOGIN_PAGE = "https://snfrankfurt.servehttp.com/login";
      private static String CURRENCY = "EUR - Euro";
-     private static String TIME_ZONE = "(+03:00) Europe - Kiev";
+     private static String TIME_ZONE = "(+02:00) Europe - Kiev";
 
     ArrayList <String> credentials = new ArrayList();
 

@@ -27,6 +27,22 @@ public class Clients extends Page {
     @FindBy(xpath = "//tbody[@data-autotest-area='tbody']/tr[1]")//+
     private WebElement firstRowInSearchArea;
 
+    @FindBy(xpath = "(.//*[@id='main-wrapper']//select)[1]")
+    private WebElement showsDropDown;
+
+    // Values for sorting
+    @FindBy(xpath = ".//*[@title='Sort by first name']")
+    private WebElement firsName;
+
+    @FindBy(xpath = ".//*[@title='Sort by last name']")
+    private WebElement lastName;
+
+    @FindBy(xpath = ".//*[@title='Sort by phone']")
+    private WebElement phone;
+
+    @FindBy(xpath = ".//*[@title='Sort by email']")
+    private WebElement email;
+
     public Clients(WebDriver webDriver) {
         super(webDriver);
     }
@@ -37,31 +53,25 @@ public class Clients extends Page {
         return PageFactory.initElements(webDriver, AddNewClientMo.class);
     }
 
-    public void editClient(){
-
-    }
-
-    public void sendKeysToSearchInput(String text){
+    private void sendKeysToSearchInput(String text){
         customSendKeys(searchInput,text);
     }
 
     public SendEmailFromClients goToSendEmailMo(){
-        openPage(".//a[starts-with(@ng-href, '/clients/client')]");
+        openPage(".//*[@sn-text = 'Send Email']");
         return PageFactory.initElements(webDriver, SendEmailFromClients.class);
     }
 
     public SomeClient goToSomeClientPage(){
-        openPage(".//a[starts-with(@ng-href, '/clients/client')]");
+        openPage(".//*[@sn-text = 'View']");
         return PageFactory.initElements(webDriver, SomeClient.class);
     }
-/*
-    public <T extends WebElement> void goSome(T tClass){
-        if (tClass instanceof SendEmailFromClients){
 
-        }
+    public void EditClientInfo(){
+        //
     }
-*/
-    public void openPage(final String path){
+
+    private void openPage(final String path){
         sendKeysToSearchInput(CLIENT_NAME);
         try {
             Thread.sleep(3000);
@@ -71,7 +81,6 @@ public class Clients extends Page {
         waitForElement(firstRowInSearchArea, webDriver,10);
         clickOnElement(firstRowInSearchArea.findElement(By.xpath(path)));
     }
-
 
     public void verifyThatSearchIsWorking(String textForValidation){
 
@@ -89,4 +98,30 @@ public class Clients extends Page {
             System.out.println("Searching fall down [2]");
         }
     }
+
+    private void changeTypeOfClients(String type){
+        if(type.equalsIgnoreCase("All")){
+            customSelectByVisibleText(showsDropDown,"Show all");
+        }else if(type.equalsIgnoreCase("Active")) {
+            customSelectByVisibleText(showsDropDown, "Active clients");
+        }else if(type.equalsIgnoreCase("Inactive")) {
+            customSelectByVisibleText(showsDropDown, "Inactive clients");
+        }
+    }
+
+    private void changeSortingType(){
+        clickOnElement(firsName);
+        waitSomeSec(webDriver, 5);
+        clickOnElement(lastName);
+        waitSomeSec(webDriver, 5);
+        clickOnElement(phone);
+        waitSomeSec(webDriver, 5);
+        clickOnElement(email);
+        waitSomeSec(webDriver, 5);
+    }
+/*
+    public boolean deleteClient(){
+
+    }
+*/
 }

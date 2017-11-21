@@ -7,6 +7,7 @@
             <class name="tests.CreateUser"/>
             <class name="tests.CreateClient"/>
             <class name="tests.CreateJob"/>
+            <class name="tests.Navigation"/>
         </classes>
     </test>
 </suite>
