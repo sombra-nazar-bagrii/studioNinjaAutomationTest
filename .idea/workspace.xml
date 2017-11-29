@@ -2,39 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="089a17d2-7210-4900-9ff0-dcbc6b4fa9e5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/properties.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageobject/Page.class" afterPath="$PROJECT_DIR$/target/classes/pageobject/Page.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageobject/calendar/CalendarP.class" afterPath="$PROJECT_DIR$/target/classes/pageobject/calendar/CalendarP.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageobject/clients/Clients.class" afterPath="$PROJECT_DIR$/target/classes/pageobject/clients/Clients.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageobject/dashboard/Dashboard.class" afterPath="$PROJECT_DIR$/target/classes/pageobject/dashboard/Dashboard.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageobject/header/Header.class" afterPath="$PROJECT_DIR$/target/classes/pageobject/header/Header.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageobject/jobsOverview/SomeJobPage.class" afterPath="$PROJECT_DIR$/target/classes/pageobject/jobsOverview/SomeJobPage.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageobject/modalForms/AddNewClientMo.class" afterPath="$PROJECT_DIR$/target/classes/pageobject/modalForms/AddNewClientMo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageobject/singIn/SingIn.class" afterPath="$PROJECT_DIR$/target/classes/pageobject/singIn/SingIn.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageobject/singUp/SingUp.class" afterPath="$PROJECT_DIR$/target/classes/pageobject/singUp/SingUp.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tests/CreateClient.class" afterPath="$PROJECT_DIR$/target/test-classes/tests/CreateClient.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tests/CreateJob.class" afterPath="$PROJECT_DIR$/target/test-classes/tests/CreateJob.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tests/CreateUser.class" afterPath="$PROJECT_DIR$/target/test-classes/tests/CreateUser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/tests/TestBase.class" afterPath="$PROJECT_DIR$/target/test-classes/tests/TestBase.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/com.studioninja.iml" afterPath="$PROJECT_DIR$/com.studioninja.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/ClientConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/ClientConfiguration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/JobConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/JobConfiguration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/Page.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/Page.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/calendar/CalendarP.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/calendar/CalendarP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/clients/Clients.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/clients/Clients.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/dashboard/Dashboard.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/dashboard/Dashboard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/header/Header.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/header/Header.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/jobsOverview/SomeJobPage.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/jobsOverview/SomeJobPage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/modalForms/AddNewClientMo.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/modalForms/AddNewClientMo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/singIn/SingIn.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/singIn/SingIn.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageobject/singUp/SingUp.java" afterPath="$PROJECT_DIR$/src/main/java/pageobject/singUp/SingUp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tests/CreateClient.java" afterPath="$PROJECT_DIR$/src/test/java/tests/CreateClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tests/CreateJob.java" afterPath="$PROJECT_DIR$/src/test/java/tests/CreateJob.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tests/CreateUser.java" afterPath="$PROJECT_DIR$/src/test/java/tests/CreateUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tests/Navigation.java" afterPath="$PROJECT_DIR$/src/test/java/tests/Navigation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tests/TestBase.java" afterPath="$PROJECT_DIR$/src/test/java/tests/TestBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/resources/page.xml" afterPath="$PROJECT_DIR$/src/test/resources/page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/page.xml" afterPath="$PROJECT_DIR$/target/test-classes/page.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,8 +21,8 @@
       <file leaf-file-name="CalendarP.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pageobject/calendar/CalendarP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="60" column="21" lean-forward="true" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="92" />
+            <state relative-caret-position="846">
+              <caret line="60" column="21" lean-forward="false" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="92" />
               <folding>
                 <element signature="method#createNewJob#0;class#CalendarP#0" expanded="false" />
                 <element signature="method#createNewExtraShoot#0;class#CalendarP#0" expanded="false" />
@@ -74,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/resources/page.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
-              <caret line="4" column="7" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+              <caret line="4" column="7" lean-forward="false" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -83,7 +51,7 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="581">
+            <state relative-caret-position="641">
               <caret line="57" column="59" lean-forward="false" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
               <folding />
             </state>
@@ -180,10 +148,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="77" />
-    <option name="y" value="82" />
-    <option name="width" value="1843" />
-    <option name="height" value="998" />
+    <option name="x" value="1920" />
+    <option name="y" value="24" />
+    <option name="width" value="1920" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -200,7 +168,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -390,6 +357,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -937,7 +905,9 @@
       <workItem from="1510672933869" duration="23000" />
       <workItem from="1510672978196" duration="2616000" />
       <workItem from="1510743416958" duration="1225000" />
-      <workItem from="1511261920688" duration="1161000" />
+      <workItem from="1511261920688" duration="1665000" />
+      <workItem from="1511355550279" duration="22000" />
+      <workItem from="1511956960742" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="add Job configuration and Job configuration factory">
       <created>1505490486299</created>
@@ -989,10 +959,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98013000" />
+    <option name="totallyTimeSpent" value="98550000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="77" y="82" width="1843" height="998" extended-state="1" />
+    <frame x="1920" y="24" width="1920" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1009,7 +979,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32832617" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26266" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26840982" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1273,7 +1243,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="48" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1281,10 +1250,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="693">
           <caret line="101" column="41" lean-forward="false" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
-          <folding>
-            <element signature="e#3091#3092#0" expanded="false" />
-            <element signature="e#3139#3140#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1423,8 +1388,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pageobject/calendar/CalendarP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="60" column="21" lean-forward="true" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="92" />
+        <state relative-caret-position="846">
+          <caret line="60" column="21" lean-forward="false" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="92" />
           <folding>
             <element signature="method#createNewJob#0;class#CalendarP#0" expanded="false" />
             <element signature="method#createNewExtraShoot#0;class#CalendarP#0" expanded="false" />
@@ -1442,14 +1407,14 @@
     <entry file="file://$PROJECT_DIR$/src/test/resources/page.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
-          <caret line="4" column="7" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+          <caret line="4" column="7" lean-forward="false" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
+        <state relative-caret-position="641">
           <caret line="57" column="59" lean-forward="false" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
           <folding />
         </state>
