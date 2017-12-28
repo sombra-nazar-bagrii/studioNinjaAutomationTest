@@ -20,4 +20,5 @@ public class SomeJobPage extends Page{
     public String getJobName(){
         return jobName.getText();
     }
+
 }

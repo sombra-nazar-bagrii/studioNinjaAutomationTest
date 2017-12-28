@@ -1,8 +1,6 @@
 package pageobject.clients;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import Factory.JobConfigurationFactory;
@@ -18,6 +16,8 @@ import java.util.List;
  */
 
 public class SomeClient extends Page {
+
+    private final By pathToIcons = By.xpath(".//h2[contains(@class, 'jobs-cell-title')]/i");
 
     @FindBy(xpath = ".//*[@ng-click = 'addNewJob()']")
     private WebElement addNewJob;
@@ -46,13 +46,18 @@ public class SomeClient extends Page {
     @FindBy(xpath = ".//*[starts-with(@ng-repeat, 'mailItem in mails' )]//div[1]")
     private List <WebElement> mailSubjects;
 
+    @FindBy(xpath = ".//*[@id = 'newJob']")
+    private WebElement newJobModal;
+
     public SomeClient(WebDriver webDriver) {
         super(webDriver);
     }
 
     public AddNewJobMo addNewJob(){
-        waitForElement(addNewJob, webDriver, 10);
+        waitForElements(pathToIcons, webDriver, 5);
+        sleepThread(1000);
         clickOnElement(addNewJob);
+        waitForElement(newJobModal, webDriver, 20);
         return PageFactory.initElements(webDriver, AddNewJobMo.class);
     }
 
@@ -117,9 +122,14 @@ public class SomeClient extends Page {
             System.out.println("This user haven't any job");
             addNewJob().createJob(
                     JobConfigurationFactory.getConfiguration("conf1"),
-                    "Job from client page");
+                    "Job from client page", "clientPage");
         }
         return PageFactory.initElements(webDriver, SomeJobPage.class);
+    }
+
+    private void script (){
+        JavascriptExecutor jas = (JavascriptExecutor) webDriver;
+        ((JavascriptExecutor) webDriver).executeScript("document.addEventListener(\"DOMContentLoaded\", function(event) { console.log(\"DOM fully loaded and parsed\");});");
     }
 }
 

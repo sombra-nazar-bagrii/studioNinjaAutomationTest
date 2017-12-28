@@ -1,6 +1,7 @@
 package pageobject.modalForms;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +17,7 @@ import pageobject.jobsOverview.SomeJobPage;
 
 public class AddNewJobMo extends Page {
 
-    private final String CLIENT_NAME = "Test";
+    private final String CLIENT_NAME = "Client";
 
     @FindBy(xpath = ".//*[@ng-model = 'clients[0]']")
     private WebElement chooseClientFirst;
@@ -54,7 +55,7 @@ public class AddNewJobMo extends Page {
     @FindBy(xpath = "(.//*[@aria-label = 'Today'])[1]")
     private WebElement todayButton;
 
-    @FindBy(id = "checkbox-squared-all-job-day-event")
+    @FindBy(xpath = ".//*[@id = 'checkbox-squared-all-job-day-event']//following-sibling::label")
     private WebElement allDateCheckBox;
 
     @FindBy(xpath = "(.//*[starts-with(@id, 'timepicker')])[1]")
@@ -63,7 +64,10 @@ public class AddNewJobMo extends Page {
     @FindBy(xpath = "(.//*[starts-with(@id, 'timepicker')])[2]")
     private WebElement timeTo;
 
-    @FindBy(id = "Autocomplete2")
+    @FindBy(xpath = ".//a[@data-action='decrementHour']")
+    private WebElement arrowDown;
+
+    @FindBy(xpath = ".//*[@id='AutocompleteJobModal']")
     private WebElement Location;
 
     @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[1]")
@@ -72,91 +76,154 @@ public class AddNewJobMo extends Page {
     @FindBy (xpath = ".//*[contains(text(), 'Save Job')]")
     private WebElement saveJob;
 
+    @FindBy (xpath = ".//*[@id = 'newJob']")
+    private WebElement modalForm;
 
     public AddNewJobMo(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public SomeJobPage createJob(JobConfiguration config, String jobnaMe) throws NoSuchMethodError {
+    public SomeJobPage createJob(JobConfiguration config, String jobnaMe, String fromWhere) throws NoSuchMethodError {
 
-    // Process of choosing client, we can choose one client or two clients also we check if 'choose client' field empty, because if we click
-    // add new job from some client page it will be already configured first client
+        // Process of choosing client, we can choose one client or two clients also we check if 'choose client' field empty, because if we click
+        // add new job from some client page it will be already configured first client
 
-        if (config.getCreateOrExisted().equals("exist") && chooseClientFirst.getAttribute("class").endsWith("ng-empty")) {
-            choosePrimaryClient();
-            if (config.getNumberOfClients().equals("two")){
-                chooseSecCllient();
+        if(fromWhere.equals("clientPage") || fromWhere.equals("clientEmail")){
+            if(!(isClientFieldWithValue())){
+                System.out.println("field should be with client name and email info");
+            }
+            if (config.getCreateOrExisted().equals("exist")) {
+
+                if (config.getNumberOfClients().equals("two")) {
+                    chooseSecCllient();
+                } else if (config.getNumberOfClients().equals("two the same")) {
+                    chooseTheSameClient();
+                }
+            } else if (config.getCreateOrExisted().equals("new")) {
+                createNewClient().createNewClient();
+                waitForElement(modalForm, webDriver,10);
+                if (config.getNumberOfClients().equals("two")) {
+                    createNewSecondaryClient().createNewClient();
+                    waitForElement(modalForm, webDriver,10);
+                }
+            }
+        } else if(fromWhere.equals("Job") || fromWhere.equals("Dashboard") || fromWhere.equals("Calendar")){
+            if (!(isClientFieldEmpty())){
+                System.out.println("field should be empty field");
+            }
+            if (config.getCreateOrExisted().equals("exist")) {
+                choosePrimaryClient();
+                if (config.getNumberOfClients().equals("two")) {
+                    chooseSecCllient();
+                } else if (config.getNumberOfClients().equals("two the same")) {
+                    chooseTheSameClient();
+                }
+            } else if (config.getCreateOrExisted().equals("new") && chooseClientFirst.getAttribute("class").endsWith("ng-empty")) {
+                createNewClient().createNewClient();
+                waitForElement(modalForm, webDriver,10);
+                if (config.getNumberOfClients().equals("two")) {
+                    createNewSecondaryClient().createNewClient();
+                    waitForElement(modalForm, webDriver,10);
+                }
+            }
+        }
+            // Process of choosing type of workflow, we have two position - created workflow OR default
+
+            if (config.getTypeOfWorkflow().equals("created")) {
+                selectCreatedWorkflow();
             }
 
-    // Process of creating new client, we can create one client or two clients also we check if 'choose client' field empty, because if we click
-    // add new job from some client page it will be already configured first client
+            // Process configuration of day duration
+            //
 
-        } else if (config.getCreateOrExisted().equals("new") && chooseClientFirst.getAttribute("class").endsWith("ng-empty")) {
-            createNewClient().createNewClient();
-            if (config.getNumberOfClients().equals("two")){
-                createNewSecondaryClient().createNewClient();
-            }
+        switch (config.getTypeOfJobDuration()) {
+            case "all day":
+                chooseTodayDay();
+                sleepThread(500);
+                clickOnElement(allDateCheckBox);
+                break;
+            case "time":
+                chooseTodayDay();
+                clickOnElement(timeFrom);
+                break;
+            case "no date":
+                clickOnElement(noDateCheckBox);
+                break;
+            case "null":
+
+                break;
+            case "time before":
+                chooseTodayDay();
+                clickOnElement(timeFrom);
+                clickOnElement(timeTo);
+                clickOnElement(arrowDown);
+                clickOnElement(arrowDown);
+                break;
+            case "no all day box":
+                chooseTodayDay();
+                break;
+            default:
+                throw new NoSuchMethodError();
         }
 
-    // Process of choosing type of workflow, we have two position - created workflow OR default
+            // Random string will be set on field 'Location' & 'Notes'
 
-        if (config.getTypeOfWorkflow().equals("created")){
-            selectCreatedWorkflow();
-        }
-
-    // Process configuration of day duration, we have three options - job with 'all day' duration, job planed on some time and job with out date
-    //
-
-        if (config.getTypeOfJobDuration().equals("all day")){
-            chooseTodayDay();
-            clickOnElement(allDateCheckBox);
-        } else if (config.getTypeOfJobDuration().equals("time")){
-            chooseTodayDay();
-            clickOnElement(timeFrom);
-        } else if (config.getTypeOfJobDuration().equals("no date")){
-            clickOnElement(noDateCheckBox);
-        } else {
-            throw new NoSuchMethodError();
-        }
-
-    // Random string will be set on field 'Location' & 'Notes'
-
-        locationNotes();
-        customClearAndSendValue(jobName, jobnaMe);
-
-    // Save current Job
-
-        clickOnElement(saveJob);
+            locationNotes();
         try {
-            Thread.sleep(1000);
+            customSelectByIndex(jobType, getJobNum(jobnaMe));
+        }catch (IndexOutOfBoundsException e){
+            customSelectByIndex(jobType, 1);
         }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+            customClearAndSendValue(jobName, jobnaMe);
 
-        return PageFactory.initElements(webDriver, SomeJobPage.class);
-    }
+            // Save current Job
+
+            clickOnElement(saveJob);
+            sleepThread(2000);
+
+            return PageFactory.initElements(webDriver, SomeJobPage.class);
+        }
 
     private AddNewClientMo createNewClient() {
         clickOnElement(addNewClientButton);
+        sleepThread(2000);
         return PageFactory.initElements(webDriver, AddNewClientMo.class);
     }
 
     private AddNewClientMo createNewSecondaryClient() {
         clickOnElement(addNewSecondClientButton);
         clickOnElement(addSecondaryClient);
+        sleepThread(2000);
         return PageFactory.initElements(webDriver, AddNewClientMo.class);
     }
 
     private void choosePrimaryClient(){
-        customClearAndSendValue(chooseClientFirst, CLIENT_NAME);
+        customSendKeys(chooseClientFirst, CLIENT_NAME);
+        sleepThread(1000);
         customSendKeys(chooseClientFirst, "1");
         webDriver.findElement(By.xpath(".//strong[contains(text(), '" + CLIENT_NAME + "1" + "')]/..")).click();
+    }
+
+    private void chooseTheSameClient(){
+        clickOnElement(addNewSecondClientButton);
+        customClearAndSendValue(chooseSecField, CLIENT_NAME);
+        sleepThread(1000);
+        customSendKeys(chooseSecField, "1");
+        webDriver.findElement(By.xpath(".//strong[contains(text(), '" + CLIENT_NAME+ "1" + "')]/..")).click();
+    }
+
+    private boolean isClientFieldEmpty(){
+          return chooseClientFirst.getAttribute("class").endsWith("ng-empty");
+    }
+
+    private boolean isClientFieldWithValue(){
+        return chooseClientFirst.getAttribute("class").endsWith("user-success");
     }
 
     private void chooseSecCllient(){
         clickOnElement(addNewSecondClientButton);
         customClearAndSendValue(chooseSecField, CLIENT_NAME);
+        sleepThread(1000);
         customSendKeys(chooseSecField, "2");
         webDriver.findElement(By.xpath(".//strong[contains(text(), '" + CLIENT_NAME+ "2" + "')]/..")).click();
     }
@@ -166,9 +233,14 @@ public class AddNewJobMo extends Page {
         customClearAndSendValue(jobNotes, generateString());
     }
 
-    private void chooseTodayDay(){
+    private void chooseTodayDay( ){
         clickOnElement(dateFrom);
         clickOnElement(todayButton);
+    }
+
+    private int getJobNum(String name){
+        int number = Integer.parseInt(name.substring(name.length() -1));
+        return number;
     }
 
     private void selectCreatedWorkflow() {
@@ -178,3 +250,4 @@ public class AddNewJobMo extends Page {
         else customSelectByIndex(workflow, 1);
     }
 }
+

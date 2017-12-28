@@ -5,9 +5,11 @@
     <test name="TestLQAS" preserve-order="true">
         <classes>
             <class name="tests.CreateUser"/>
-            <class name="tests.CreateClient"/>
-            <class name="tests.CreateJob"/>
-            <class name="tests.Navigation"/>
+            <!--class name="tests.CreateClient"/-->
+            <!--class name="tests.CreatingJobFromDashboard"/-->
+            <class name="tests.CreatingJobFromClientOverview"/>
+            <!--class name="tests.CreatingJobFromJobSection"/-->
+            <!--class name="tests.Navigation"/-->
         </classes>
     </test>
 </suite>

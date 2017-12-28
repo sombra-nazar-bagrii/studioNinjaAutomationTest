@@ -67,6 +67,48 @@ public class JobConfigurationFactory {
                     .setTypeOfJobDuration("no date")
                     .setTypeOfWorkflow("created");
         }
+        if ("JobConf7".equals(nameConfiguration)){
+            return new JobConfiguration()
+                    .setNumberOfClients("null")
+                    .setCreateOrExisted("null")
+                    .setTypeOfJobDuration("no date")
+                    .setTypeOfWorkflow("default");
+        }
+        if ("JobConf8".equals(nameConfiguration)){
+            return new JobConfiguration()
+                    .setNumberOfClients("one")
+                    .setCreateOrExisted("exist")
+                    .setTypeOfJobDuration("no date")
+                    .setTypeOfWorkflow("default");
+        }
+        if ("JobConf9".equals(nameConfiguration)){
+            return new JobConfiguration()
+                    .setNumberOfClients("one")
+                    .setCreateOrExisted("exist")
+                    .setTypeOfJobDuration("null")
+                    .setTypeOfWorkflow("default");
+        }
+        if ("JobConf10".equals(nameConfiguration)){
+            return new JobConfiguration()
+                    .setNumberOfClients("one")
+                    .setCreateOrExisted("exist")
+                    .setTypeOfJobDuration("no all day box")
+                    .setTypeOfWorkflow("created");
+        }
+        if ("JobConf11".equals(nameConfiguration)){
+            return new JobConfiguration()
+                    .setNumberOfClients("two the same")
+                    .setCreateOrExisted("exist")
+                    .setTypeOfJobDuration("no date")
+                    .setTypeOfWorkflow("default");
+        }
+        if ("JobConf12".equals(nameConfiguration)){
+            return new JobConfiguration()
+                    .setNumberOfClients("one")
+                    .setCreateOrExisted("exist")
+                    .setTypeOfJobDuration("time before")
+                    .setTypeOfWorkflow("default");
+        }
         else return null;
     }
 }

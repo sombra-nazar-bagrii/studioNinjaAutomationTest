@@ -73,11 +73,7 @@ public class Clients extends Page {
 
     private void openPage(final String path){
         sendKeysToSearchInput(CLIENT_NAME);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleepThread(2000);
         waitForElement(firstRowInSearchArea, webDriver,10);
         clickOnElement(firstRowInSearchArea.findElement(By.xpath(path)));
     }

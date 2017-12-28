@@ -66,9 +66,9 @@ public class Dashboard extends Page {
     }
 
     public AddNewJobMo createNewJob (){
-        waitForElement(addNew, webDriver, 10);
         addNew.click();
         clickOnElement(addJob);
+        sleepThread(2000);
         return PageFactory.initElements(webDriver, AddNewJobMo.class);
     }
 
@@ -91,13 +91,11 @@ public class Dashboard extends Page {
     }
 
     private boolean checkIfUpcomingSectionWorksJob( ) {
-
-
         if (isElementDisplayed(noUpcomingLabel)) {
             createNewJob()
                     .createJob(
                             JobConfigurationFactory.getConfiguration("JobConf1"),
-                            JOB_NAME);
+                            JOB_NAME, "Dashboard");
             waitSomeSec(webDriver, 5);
             returnHeader()
                     .goToDashboard();

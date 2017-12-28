@@ -150,23 +150,23 @@ public class CalendarP extends Page {
         return this;
     }
 
-dsf
-
     private boolean checkIfEventDisplayed (String typeOfEvent, String name, String day, String month, String eventTime){
         if(typeOfEvent.equalsIgnoreCase(job) && monthNavigation(day, month)){
             System.out.println("a job has been found");
+            return true;
         } else if(typeOfEvent.equalsIgnoreCase(appointment)){
-            monthNavigation(day, month);
+            return monthNavigation(day, month);
         }else if (typeOfEvent.equalsIgnoreCase(extraShoot)){
-            monthNavigation(day, month);
+            return monthNavigation(day, month);
+        }else {
+            return false;
         }
     }
 
     private boolean monthNavigation(String day, String month){
         if ( c.get(Calendar.MONTH) == getMonthNumber(month)){
             for (WebElement finder: allDays) {
-                if (finder.getText().equalsIgnoreCase(day))
-                    return true;
+                return finder.getText().equalsIgnoreCase(day);
             }
         } else if(c.get(Calendar.MONTH) > getMonthNumber(month)){
             for( int i = c.get(Calendar.MONTH) - getMonthNumber(month); i <= 0 ; i--){
@@ -174,8 +174,7 @@ dsf
                 clickOnElement(next);
             }
             for (WebElement finder: allDays) {
-                if (finder.getText().equalsIgnoreCase(day))
-                    return true;
+                return finder.getText().equalsIgnoreCase(day);
             }
         } else if (c.get(Calendar.MONTH) < getMonthNumber(month)){
             for( int i = getMonthNumber(month) - c.get(Calendar.MONTH); i <= 0 ; i--){
@@ -183,10 +182,10 @@ dsf
                 clickOnElement(previous);
             }
             for (WebElement finder: allDays) {
-                if (finder.getText().equalsIgnoreCase(day))
-                    return true;
+                return finder.getText().equalsIgnoreCase(day);
             }
-        } else return false;
+        }
+        return false;
     }
 
     /*

@@ -49,6 +49,7 @@ public class SingIn extends Page {
         clickOnElement(staySignedIn);
          try {
             singInButton.click();
+            Thread.sleep(4000);
         } catch (Exception e){
              throw new InvalidArgumentException("Invalid user details");
         }
@@ -58,7 +59,7 @@ public class SingIn extends Page {
         customClearAndSendValue(email, mail + 'q');
         customClearAndSendValue(password, pass + 'q');
         singInButton.click();
-        if (isToasterValid(getTosterTitle(), getTosterMessage())) {
+        if (isToasterValid(getTosterTitle(), getTosterMessage(), ERROR_TYPE)) {
             out.println("Error message valid!");
             return true;
         }

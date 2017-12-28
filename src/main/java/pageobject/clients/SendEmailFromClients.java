@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import pageobject.Page;
+import pageobject.modalForms.AddNewJobMo;
 
 import java.util.List;
 
@@ -41,6 +43,9 @@ public class SendEmailFromClients extends Page {
     @FindBy(xpath = ".//*[@id='sendContactEmailModal']//*[@ng-disabled='disableBtnOnSend']")
     private WebElement sendEmail;
 
+    @FindBy(xpath = ".//*[@id = 'newJob']")
+    private WebElement newJobModal;
+
     public SendEmailFromClients(WebDriver webDriver) {
         super(webDriver);
     }
@@ -58,6 +63,13 @@ public class SendEmailFromClients extends Page {
 
     private int getElementOptionsSize(final WebElement webElement){
         return webElement.findElements(By.tagName("option")).size();
+    }
+
+    public AddNewJobMo addNewJob(){
+        sleepThread(1000);
+        clickOnElement(addANewJob);
+        waitForElement(newJobModal, webDriver, 20);
+        return PageFactory.initElements(webDriver, AddNewJobMo.class);
     }
 }
 

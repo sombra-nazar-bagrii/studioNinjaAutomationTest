@@ -11,12 +11,13 @@ import pageobject.clients.SomeClient;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by sombra-15 on 09.09.17.
  */
 public class AddNewClientMo extends Page {
-    private final String isClientCompany = "Yes";
+    private final String isClientCompany = "no";
 
     @FindBy(xpath = ".//*[@ng-model = 'companyNameChecked']/following-sibling::label")
     private WebElement clientIsACompanyBox;
@@ -49,8 +50,16 @@ public class AddNewClientMo extends Page {
     @FindBy(xpath = ".//*[@ng-model = 'client.country']")
     private WebElement country;
 
-    @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[1]")
-    private WebElement notes;
+    @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[2]")
+    private WebElement notesFromJob;
+
+    /*
+    @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[2]")
+    private WebElement notesFromJob;
+
+    @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[2]")
+    private WebElement notesFromJob;
+    */
 
     @FindBy(xpath = "(.//*[@ng-model='client.companyName'])[1]")
     private WebElement company;
@@ -63,8 +72,10 @@ public class AddNewClientMo extends Page {
         super(webDriver);
     }
 
+    Random rand = new Random();
+
     public Clients createNewClient() {
-        List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country, notes);
+        List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country, notesFromJob);
         if (isClientCompany.trim().equalsIgnoreCase("Yes")) {
             clickOnElement(clientIsACompanyBox);
             customClearAndSendValue(company, ClientConfiguration.getFirstName());
@@ -74,13 +85,14 @@ public class AddNewClientMo extends Page {
                 ClientConfiguration.getAllValues());
         customClearAndSendValue(
                 email,
-                ClientConfiguration.getFirstName().replaceAll(" ","") + "@" + ClientConfiguration.getLastName() + ".com");
-        clickOnElement(saveClient);
+                ClientConfiguration.getFirstName().replaceAll(" ","") + rand.nextInt(99) +"@" + ClientConfiguration.getLastName() + ".com");
+        saveClient.click();
+        sleepThread(1500);
         return PageFactory.initElements(webDriver, Clients.class);
     }
 
     public SomeClient editClientInformation(){
-        List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country, notes);
+        List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country);
         if (isClientCompany.trim().equalsIgnoreCase("Yes")) {
             clickOnElement(clientIsACompanyBox);
             customClearAndSendValue(company, ClientConfiguration.getFirstName());

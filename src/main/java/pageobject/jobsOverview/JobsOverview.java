@@ -32,8 +32,9 @@ public class JobsOverview extends Page {
     }
 
     public AddNewJobMo addNewJob (){
-        waitForElement(addNewJobButton,webDriver, 10);
+        waitForElement(addNewJobButton, webDriver, 10);
         clickOnElement(addNewJobButton);
+        sleepThread(2000);
         return PageFactory.initElements(webDriver, AddNewJobMo.class);
     }
 }

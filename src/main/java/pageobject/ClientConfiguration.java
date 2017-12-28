@@ -14,7 +14,7 @@ public class ClientConfiguration {
     private static final List<String> town = Arrays.asList("Lviv", "Ivano-F", "Kiev", "London");
     private static final List<String> postcode = Arrays.asList("87125", "32136");
     private static final List<String> state = Arrays.asList("Some", "I don't know");
-    private static final List<String> country = Arrays.asList("Ukraine", "Russia", "Poland");
+    private static final List<String> country = Arrays.asList("Ukraine", "Au", "Poland");
     private static final List<String> notes = Arrays.asList("bla bla bla", "Some notes");
 
     static Random rand = new Random();
