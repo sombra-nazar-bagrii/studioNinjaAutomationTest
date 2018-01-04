@@ -21,7 +21,12 @@ public class JobConfigurationFactory {
      4.    2          exist        all day     created
      5.    2           new          time       default
      6.    2           new         no date     created
-
+     7.    0           null        no date     created
+     8.    1          exist        no date     created      no job name
+     9.    1          exist         empty      created
+     10.   1          exist   w/o all day box  created
+     11.   2        the same       no date     created
+     12.   1          exist      time before   created
     */
 
     public static JobConfiguration getConfiguration(final String nameConfiguration){

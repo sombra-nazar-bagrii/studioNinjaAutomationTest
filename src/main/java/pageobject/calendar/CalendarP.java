@@ -1,5 +1,6 @@
 package pageobject.calendar;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,10 +11,7 @@ import pageobject.modalForms.AddNewExtraShootMo;
 import pageobject.modalForms.AddNewJobMo;
 
 import java.time.Month;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -30,11 +28,12 @@ public class CalendarP extends Page {
     private String appointment = "Appointment";
     private String job = "Main shoot";
     private String extraShoot = "Extra Shoot";
+    Random r = new Random();
 
     @FindBy(xpath = ".//*[@id='main-wrapper']//*[@ng-click='addNew()']")
     private WebElement addNew;
 
-    @FindBy(xpath = ".//*[@id='addNewModal']//*[@title = 'job']")
+    @FindBy(xpath = ".//*[@id='addNewModal']//*[@title = 'job (main shoot)']")
     private WebElement addJob;
 
     @FindBy(xpath = ".//*[@id='addNewModal']//*[@title = 'extra shoot']")
@@ -58,8 +57,8 @@ public class CalendarP extends Page {
     @FindBy(xpath = ".//*[@id='main-wrapper']//*[@title = 'Next']")
     private WebElement next;
 
-    @FindBy(xpath = ".//*[contains(@class, 'calendar-cell') and contains(@class, 'pointer')]")
-    private List<WebElement> allDays;
+    @FindBy(xpath = ".//*[(contains(@class, 'calendar-cell')) and not(contains(@class, 'no-curent-date'))]")
+    private List<WebElement> daysFromCurrentMonth;
 
     @FindBy(xpath = ".//*[contains(@class, 'no-curent-date')]")
     private List <WebElement> daysNotFromCurrentMonth;
@@ -76,15 +75,45 @@ public class CalendarP extends Page {
     @FindBy(xpath = "(.//*[@id='main-wrapper']//*[@ng-if = 'month'])[2]")
     private WebElement monthLabel;
 
+    @FindBy(xpath = ".//*[@id = 'newJob']")
+    private WebElement newJobModal;
+
+    @FindBy(xpath = ".//*[contains(@id, 'calendar-table')]//*[contains(@class, 'pointer')]")
+    private WebElement viewMore;
+
+    @FindBy(xpath = ".//*[contains(@class, 'empty-td-body')]/..")
+    private List<WebElement> weekList;
+
+    @FindBy(xpath = ".//*[@id='addNewModal']")
+    private WebElement addNewModalForm;
+
     public CalendarP(WebDriver webDriver) {
         super(webDriver);
-        allDays.removeAll(daysNotFromCurrentMonth);
     }
 
-    public AddNewJobMo createNewJob (){
+    public AddNewJobMo createNewJobUsingButton (){
         waitForElement(addNew, webDriver, 10);
         addNew.click();
+        waitForElement(addNewModalForm, webDriver, 10);
         clickOnElement(addJob);
+
+        return PageFactory.initElements(webDriver, AddNewJobMo.class);
+    }
+
+    public AddNewJobMo createNewJobMonth (String month){
+        waitForElement(addNew, webDriver, 10);
+        monthNavigation(getRandDate(), month);
+        clickOnElement(addJob);
+        waitForElement(newJobModal, webDriver, 7);
+        return PageFactory.initElements(webDriver, AddNewJobMo.class);
+    }
+
+    public AddNewJobMo createNewJobWeek (){
+        waitForElement(week, webDriver, 10);
+        chooseWeekSection();
+        clickOnElement(viewMore);
+        clickOnElement(chooseJobTime(weekList));
+        waitForElement(newJobModal, webDriver, 7);
         return PageFactory.initElements(webDriver, AddNewJobMo.class);
     }
 
@@ -150,6 +179,7 @@ public class CalendarP extends Page {
         return this;
     }
 
+    /*
     private boolean checkIfEventDisplayed (String typeOfEvent, String name, String day, String month, String eventTime){
         if(typeOfEvent.equalsIgnoreCase(job) && monthNavigation(day, month)){
             System.out.println("a job has been found");
@@ -162,30 +192,34 @@ public class CalendarP extends Page {
             return false;
         }
     }
+    */
 
-    private boolean monthNavigation(String day, String month){
-        if ( c.get(Calendar.MONTH) == getMonthNumber(month)){
-            for (WebElement finder: allDays) {
-                return finder.getText().equalsIgnoreCase(day);
+    private void monthNavigation(String day, String month) {
+        if (c.get(Calendar.MONTH) == getMonthNumber(month)) {
+            for (WebElement finder : daysFromCurrentMonth) {
+                if (finder.findElement(By.xpath(".//td[contains(@class, 'td-head')]/div")).getText().equalsIgnoreCase(day)) {
+                    clickOnElement(finder.findElement(By.xpath("./table")));
+                }
             }
-        } else if(c.get(Calendar.MONTH) > getMonthNumber(month)){
-            for( int i = c.get(Calendar.MONTH) - getMonthNumber(month); i <= 0 ; i--){
-                waitForElement(next, webDriver, 3);
-                clickOnElement(next);
+        } else if (c.get(Calendar.MONTH) > getMonthNumber(month)) {
+            for (int i = c.get(Calendar.MONTH) - getMonthNumber(month) ; i > 0 ; i--) {
+                goToPreviousCallendarPage();
             }
-            for (WebElement finder: allDays) {
-                return finder.getText().equalsIgnoreCase(day);
+            for (WebElement finder : daysFromCurrentMonth) {
+                if (finder.findElement(By.xpath(".//td[contains(@class, 'td-head')]/div")).getText().equalsIgnoreCase(day)) {
+                    clickOnElement(finder.findElement(By.xpath("./table")));
+                }
             }
-        } else if (c.get(Calendar.MONTH) < getMonthNumber(month)){
-            for( int i = getMonthNumber(month) - c.get(Calendar.MONTH); i <= 0 ; i--){
-                waitForElement(previous, webDriver, 3);
-                clickOnElement(previous);
+        } else if (c.get(Calendar.MONTH) < getMonthNumber(month)) {
+            for (int i = (getMonthNumber(month) - c.get(Calendar.MONTH)); i > 0; i--) {
+                goToNextCallendarPage();
             }
-            for (WebElement finder: allDays) {
-                return finder.getText().equalsIgnoreCase(day);
+            for (WebElement finder : daysFromCurrentMonth) {
+                if (finder.findElement(By.xpath(".//td[contains(@class, 'td-head')]/div")).getText().equalsIgnoreCase(day)) {
+                    clickOnElement(finder.findElement(By.xpath("./table")));
+                }
             }
         }
-        return false;
     }
 
     /*
@@ -246,7 +280,19 @@ public class CalendarP extends Page {
         }
     }
 
-    private int getMonthNumber (String monthName){
-        return Month.valueOf(monthName.toUpperCase()).getValue();
+    private String getRandDate(){
+        Integer i = r.nextInt(28) +1;
+        return i.toString();
     }
+
+    private WebElement chooseJobTime(List<WebElement> list){
+        return list.get(r.nextInt(list.size()));
+    }
+
+    private int getMonthNumber (String monthName){
+        return Month.valueOf(monthName.toUpperCase()).getValue() -1;
+    }
+
 }
+
+

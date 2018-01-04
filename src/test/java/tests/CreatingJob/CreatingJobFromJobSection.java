@@ -1,10 +1,11 @@
-package tests;
+package tests.CreatingJob;
 
 import Factory.JobConfigurationFactory;
 import Factory.Messages;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import tests.TestBase;
 
 /**
  * Created by sombramac-8 on 12/26/17.
@@ -39,7 +40,6 @@ public class CreatingJobFromJobSection extends TestBase {
     @DataProvider
     public Object[][] getJobNegativeConf(){
         return new Object[][]{
-                {"JobConf7","Test 2.7"},
                 {"JobConf8", ""},
                 {"JobConf9","Test 2.9"},
                 {"JobConf10", "Test 2.10"},

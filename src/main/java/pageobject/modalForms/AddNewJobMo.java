@@ -1,9 +1,6 @@
 package pageobject.modalForms;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -46,10 +43,13 @@ public class AddNewJobMo extends Page {
     @FindBy(xpath = ".//*[@id = 'checkbox-squared-has-date']/following-sibling::label")
     private WebElement noDateCheckBox;
 
-    @FindBy(xpath = "(.//*[@placeholder ='dd/mm/yyyy'])[1]")
+    @FindBy(xpath = ".//input[contains(@ng-model, 'job.startDate')]/following-sibling::input")
     private WebElement dateFrom;
 
-    @FindBy(xpath = "(.//*[@placeholder ='dd/mm/yyyy'])[2]")
+    @FindBy(xpath = ".//input[contains(@ng-model, 'job.startDate')]")
+    private WebElement dateForCheck;
+
+    @FindBy(xpath = ".//input[contains(@ng-model, 'job.finishDate')]/following-sibling::input")
     private WebElement dateTo;
 
     @FindBy(xpath = "(.//*[@aria-label = 'Today'])[1]")
@@ -58,10 +58,10 @@ public class AddNewJobMo extends Page {
     @FindBy(xpath = ".//*[@id = 'checkbox-squared-all-job-day-event']//following-sibling::label")
     private WebElement allDateCheckBox;
 
-    @FindBy(xpath = "(.//*[starts-with(@id, 'timepicker')])[1]")
+    @FindBy(xpath = ".//div[contains(@dom-time, 'job_start_time')]/input")
     private WebElement timeFrom;
 
-    @FindBy(xpath = "(.//*[starts-with(@id, 'timepicker')])[2]")
+    @FindBy(xpath = ".//div[contains(@dom-time, 'job_finish_time')]/input")
     private WebElement timeTo;
 
     @FindBy(xpath = ".//a[@data-action='decrementHour']")
@@ -73,11 +73,17 @@ public class AddNewJobMo extends Page {
     @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[1]")
     private WebElement jobNotes;
 
+    @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[3]")
+    private WebElement jobNotesEmail;
+
     @FindBy (xpath = ".//*[contains(text(), 'Save Job')]")
     private WebElement saveJob;
 
     @FindBy (xpath = ".//*[@id = 'newJob']")
     private WebElement modalForm;
+
+    @FindBy (xpath = ".//span[contains(@class, 'job-head__name')]")
+    private WebElement jobNameFromPage;
 
     public AddNewJobMo(WebDriver webDriver) {
         super(webDriver);
@@ -107,7 +113,7 @@ public class AddNewJobMo extends Page {
                     waitForElement(modalForm, webDriver,10);
                 }
             }
-        } else if(fromWhere.equals("Job") || fromWhere.equals("Dashboard") || fromWhere.equals("Calendar")){
+        } else if(fromWhere.equals("Job") || fromWhere.equals("Dashboard") || fromWhere.equals("Calendar")|| fromWhere.equals("CalendarM")|| fromWhere.equals("CalendarW")){
             if (!(isClientFieldEmpty())){
                 System.out.println("field should be empty field");
             }
@@ -135,35 +141,80 @@ public class AddNewJobMo extends Page {
 
             // Process configuration of day duration
             //
-
-        switch (config.getTypeOfJobDuration()) {
-            case "all day":
-                chooseTodayDay();
-                sleepThread(500);
-                clickOnElement(allDateCheckBox);
+        switch (fromWhere) {
+            case "CalendarM":
+                switch (config.getTypeOfJobDuration()) {
+                    case "all day":
+                        clickOnElement(allDateCheckBox);
+                        break;
+                    case "time":
+                        clickOnElement(timeFrom);
+                        break;
+                    case "no date":
+                        clickOnElement(noDateCheckBox);
+                        break;
+                    case "time before":
+                        clickOnElement(timeFrom);
+                        clickOnElement(timeTo);
+                        clickOnElement(arrowDown);
+                        clickOnElement(arrowDown);
+                        break;
+                    case "no all day box":
+                        break;
+                    default:
+                        throw new NoSuchMethodError();
+                }
                 break;
-            case "time":
-                chooseTodayDay();
-                clickOnElement(timeFrom);
-                break;
-            case "no date":
-                clickOnElement(noDateCheckBox);
-                break;
-            case "null":
-
-                break;
-            case "time before":
-                chooseTodayDay();
-                clickOnElement(timeFrom);
-                clickOnElement(timeTo);
-                clickOnElement(arrowDown);
-                clickOnElement(arrowDown);
-                break;
-            case "no all day box":
-                chooseTodayDay();
+            case "CalendarW":
+                switch (config.getTypeOfJobDuration()) {
+                    case "all day":
+                        clickOnElement(allDateCheckBox);
+                        break;
+                    case "time":
+                        break;
+                    case "no date":
+                        clickOnElement(noDateCheckBox);
+                        break;
+                    case "time before":
+                        clickOnElement(timeTo);
+                        clickOnElement(arrowDown);
+                        clickOnElement(arrowDown);
+                        break;
+                    default:
+                        throw new NoSuchMethodError();
+                }
                 break;
             default:
-                throw new NoSuchMethodError();
+                switch (config.getTypeOfJobDuration()) {
+                    case "all day":
+                        chooseTodayDay();
+                        sleepThread(500);
+                        clickOnElement(allDateCheckBox);
+                        break;
+                    case "time":
+                        chooseTodayDay();
+                        clickOnElement(timeFrom);
+                        break;
+                    case "no date":
+                        clickOnElement(noDateCheckBox);
+                        break;
+                    case "null":
+
+                        break;
+                    case "time before":
+                        chooseTodayDay();
+                        clickOnElement(timeFrom);
+                        clickOnElement(timeTo);
+                        clickOnElement(arrowDown);
+                        clickOnElement(arrowDown);
+                        break;
+                    case "no all day box":
+                        chooseTodayDay();
+                        break;
+                    default:
+                        throw new NoSuchMethodError();
+                }
+                break;
         }
 
             // Random string will be set on field 'Location' & 'Notes'
@@ -179,8 +230,7 @@ public class AddNewJobMo extends Page {
             // Save current Job
 
             clickOnElement(saveJob);
-            sleepThread(2000);
-
+            sleepThread(5000);
             return PageFactory.initElements(webDriver, SomeJobPage.class);
         }
 
@@ -230,7 +280,11 @@ public class AddNewJobMo extends Page {
 
     private void locationNotes(){
         customClearAndSendValue(Location, generateString());
-        customClearAndSendValue(jobNotes, generateString());
+        try {
+            customClearAndSendValue(jobNotes, generateString());
+        }catch (ElementNotInteractableException e){
+            customClearAndSendValue(jobNotesEmail, generateString());
+        }
     }
 
     private void chooseTodayDay( ){
@@ -241,6 +295,10 @@ public class AddNewJobMo extends Page {
     private int getJobNum(String name){
         int number = Integer.parseInt(name.substring(name.length() -1));
         return number;
+    }
+
+    private boolean isDateEmpty(){
+        return dateForCheck.getAttribute("class").contains("ng-empty");
     }
 
     private void selectCreatedWorkflow() {

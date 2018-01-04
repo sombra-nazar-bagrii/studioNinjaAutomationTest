@@ -1,15 +1,16 @@
-package tests;
+package tests.CreatingJob;
 
 import Factory.Messages;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import Factory.JobConfigurationFactory;
+import tests.TestBase;
 
 /**
  * Created by sombra-15 on 12.09.17.
  */
-public class CreatingJobFromDashboard extends TestBase{
+public class CreatingJobFromDashboard extends TestBase {
 
     private final String PLACE = "Dashboard";
 

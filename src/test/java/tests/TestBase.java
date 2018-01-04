@@ -37,7 +37,7 @@ public class TestBase {
     @BeforeSuite
     public void init(String browserName) throws Exception {
         webDriver = WebDriverFactory.getInstance(browserName);
-        webDriver.get("https://app.studioninja.co/login");
+        webDriver.get("https://stdn.pp.ua/login");
     }
     @BeforeMethod
     public void includeExclude(){
@@ -52,7 +52,7 @@ public class TestBase {
             FileUtils.copyFile(scrFile, new File("errorScreenshots\\" + testResult.getName() + "-"
                     + Arrays.toString(testResult.getParameters()) + ".jpg"));
         }
-        webDriver.get("https://app.studioninja.co");
+        webDriver.get("https://stdn.pp.ua");
     }
     @AfterSuite
     public void afterSuiteMethod(){
