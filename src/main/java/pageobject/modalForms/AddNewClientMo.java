@@ -50,7 +50,7 @@ public class AddNewClientMo extends Page {
     @FindBy(xpath = ".//*[@ng-model = 'client.country']")
     private WebElement country;
 
-    @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[2]")
+    @FindBy(css = "[ng-model='html']")
     private WebElement notesFromJob;
 
     /*
