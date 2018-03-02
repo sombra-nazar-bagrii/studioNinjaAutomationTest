@@ -1,5 +1,6 @@
 package pageobject.modalForms;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,7 +51,7 @@ public class AddNewClientMo extends Page {
     @FindBy(xpath = ".//*[@ng-model = 'client.country']")
     private WebElement country;
 
-    @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[2]")
+    @FindBy(css = "[ng-model='html']")
     private WebElement notesFromJob;
 
     /*
@@ -75,14 +76,19 @@ public class AddNewClientMo extends Page {
     Random rand = new Random();
 
     public Clients createNewClient() {
-        List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country, notesFromJob);
+        List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country);
         if (isClientCompany.trim().equalsIgnoreCase("Yes")) {
             clickOnElement(clientIsACompanyBox);
             customClearAndSendValue(company, ClientConfiguration.getFirstName());
         }
+        List<String> values=ClientConfiguration.getAllValues();
         setAllValuesForAllElements(
                 list,
-                ClientConfiguration.getAllValues());
+                values);
+        //to prevent issue on multiple modals
+        this.country.sendKeys(Keys.TAB);
+        this.notesFromJob=webDriver.switchTo().activeElement();
+        this.notesFromJob.sendKeys(values.get(8));
         customClearAndSendValue(
                 email,
                 ClientConfiguration.getFirstName().replaceAll(" ","") + rand.nextInt(99) +"@" + ClientConfiguration.getLastName() + ".com");

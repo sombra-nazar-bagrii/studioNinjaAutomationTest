@@ -5,7 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobject.Page;
+import pageobject.header.Header;
 import pageobject.modalForms.AddNewAppointmentMo;
 import pageobject.modalForms.AddNewExtraShootMo;
 import pageobject.modalForms.AddNewJobMo;
@@ -30,10 +33,10 @@ public class CalendarP extends Page {
     private String extraShoot = "Extra Shoot";
     Random r = new Random();
 
-    @FindBy(xpath = ".//*[@id='main-wrapper']//*[@ng-click='addNew()']")
+    @FindBy(css = "[ng-click='addNew()']")
     private WebElement addNew;
 
-    @FindBy(xpath = ".//*[@id='addNewModal']//*[@title = 'job (main shoot)']")
+    @FindBy(css = "[add='addJob({event:event})']")
     private WebElement addJob;
 
     @FindBy(xpath = ".//*[@id='addNewModal']//*[@title = 'extra shoot']")
@@ -94,12 +97,11 @@ public class CalendarP extends Page {
     public AddNewJobMo createNewJobUsingButton (){
         waitForElement(addNew, webDriver, 10);
         addNew.click();
-        waitForElement(addNewModalForm, webDriver, 10);
+        sleepThread(10000);
+        waitForElement(addJob, webDriver, 10);
         clickOnElement(addJob);
-
         return PageFactory.initElements(webDriver, AddNewJobMo.class);
     }
-
     public AddNewJobMo createNewJobMonth (String month){
         waitForElement(addNew, webDriver, 10);
         monthNavigation(getRandDate(), month);
