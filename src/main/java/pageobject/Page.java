@@ -97,7 +97,7 @@ public abstract class Page {
                     getTosterMessage().equalsIgnoreCase(message) &&
                     isElementDisplayed(typeOfMessage(type));
         }
-        catch (NoSuchElementException e){
+        catch (StaleElementReferenceException e){
             e.printStackTrace();
             return false;
         }
