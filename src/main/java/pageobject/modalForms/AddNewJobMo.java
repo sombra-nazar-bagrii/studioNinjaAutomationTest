@@ -3,6 +3,7 @@ package pageobject.modalForms;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import pageobject.JobConfiguration;
 import pageobject.Page;
@@ -16,10 +17,10 @@ public class AddNewJobMo extends Page {
 
     private final String CLIENT_NAME = "Client";
 
-    @FindBy(xpath = ".//*[@ng-model = 'clients[0]']")
+    @FindBy(css = "[placeholder='Start entering client name']")
     private WebElement chooseClientFirst;
 
-    @FindBy(xpath = ".//*[@ng-model = 'clients[1]']")
+    @FindBy(css = "[ng-model='job.secondaryContact']")
     private WebElement chooseSecField;
 
     @FindBy(xpath = ".//*[@data-autotest-button='addNewClientFirst']")
@@ -40,7 +41,7 @@ public class AddNewJobMo extends Page {
     @FindBy(id = "job-type")
     private WebElement jobType;
 
-    @FindBy(xpath = ".//*[@id = 'checkbox-squared-has-date']/following-sibling::label")
+    @FindBy(id = "noDateJob")
     private WebElement noDateCheckBox;
 
     @FindBy(xpath = ".//input[contains(@ng-model, 'job.startDate')]/following-sibling::input")
@@ -196,7 +197,7 @@ public class AddNewJobMo extends Page {
                         clickOnElement(timeFrom);
                         break;
                     case "no date":
-                        clickOnElement(noDateCheckBox);
+                        hardClick(webDriver,noDateCheckBox);
                         break;
                     case "null":
 
@@ -219,10 +220,11 @@ public class AddNewJobMo extends Page {
 
             // Random string will be set on field 'Location' & 'Notes'
 
-            locationNotes();
+//            locationNotes();
         try {
+
             customSelectByIndex(jobType, getJobNum(jobnaMe));
-        }catch (IndexOutOfBoundsException e){
+        }catch (Exception e){
             customSelectByIndex(jobType, 1);
         }
             customClearAndSendValue(jobName, jobnaMe);

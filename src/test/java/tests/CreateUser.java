@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
  */
 
 public class CreateUser extends TestBase {
-    private static String EMAIL = "posya.klyueva@gmail.com";
-    private static String PASSWORD = "123123";
+    private static String EMAIL = "taras.makar@sombrainc.com";
+    private static String PASSWORD = "testtest";
 
     @Test (priority = 1, enabled = false)
     public void checkIfErrorMessageValid(){

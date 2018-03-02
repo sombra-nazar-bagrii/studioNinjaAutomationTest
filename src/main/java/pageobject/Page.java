@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Predicate;
+
 
 /**
  * Created by sombra17 on 09.12.16.
@@ -124,7 +124,10 @@ public abstract class Page {
     protected void clickOnElement(WebElement element){
         element.click();
     }
-
+    protected void hardClick(WebDriver driver,WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", element);
+    }
     protected boolean isElementPresent(WebElement element) {
         try {
             element.isEnabled();

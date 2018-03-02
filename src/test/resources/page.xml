@@ -5,11 +5,11 @@
     <test name="TestLQAS" preserve-order="true">
         <classes>
             <class name="tests.CreateUser"/>
-            <!--class name="tests.CreateClient"/-->
-            <!--class name="tests.CreatingJob.CreatingJobFromDashboard"/-->
+            <class name="tests.CreateClient"/>
+            <class name="tests.CreatingJob.CreatingJobFromDashboard"/>
             <!--class name="tests.CreatingJob.CreatingJobFromClientOverview"/-->
             <!--class name="tests.CreatingJob.CreatingJobFromSendEmail"/-->
-            <class name="tests.CreatingJob.CreatingJobFromCalendar"/>
+            <!--<class name="tests.CreatingJob.CreatingJobFromCalendar"/>-->
             <!--class name="tests.CreatingJob.CreatingJobFromJobSection"/-->
             <!--class name="tests.Navigation"/-->
         </classes>

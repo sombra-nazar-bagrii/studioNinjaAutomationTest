@@ -38,7 +38,7 @@ public class WebDriverFactory {
                 setChromeDriver();
 
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("test-type");
+//                options.addArguments("test-type");
                 dc = DesiredCapabilities.chrome();
                 dc.setCapability(ChromeOptions.CAPABILITY, options);
                 webDriver = new ChromeDriver(dc);
