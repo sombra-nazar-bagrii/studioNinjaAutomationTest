@@ -122,6 +122,7 @@ public abstract class Page {
     }
 
     protected void clickOnElement(WebElement element){
+        waitForElement(element,webDriver,5);
         element.click();
     }
     protected void hardClick(WebDriver driver,WebElement element){
