@@ -11,6 +11,7 @@ import pageobject.jobsOverview.SomeJobPage;
 import pageobject.modalForms.AddNewAppointmentMo;
 import pageobject.modalForms.AddNewExtraShootMo;
 import pageobject.modalForms.AddNewJobMo;
+import pageobject.modalForms.AddNewLeadMo;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -42,6 +43,9 @@ public class Dashboard extends Page {
     @FindBy(xpath = ".//*[@id='addNewModal']//*[@title = 'job']")
     private WebElement addJob;
 
+    @FindBy(xpath = ".//*[@id='addNewModal']//*[@title = 'lead']")
+    private WebElement addLead;
+
     @FindBy(xpath = ".//*[@id='addNewModal']//*[@title = 'extra shoot']")
     private WebElement addExtrashoot;
 
@@ -70,6 +74,12 @@ public class Dashboard extends Page {
         clickOnElement(addJob);
         sleepThread(2000);
         return PageFactory.initElements(webDriver, AddNewJobMo.class);
+    }
+    public AddNewLeadMo createNewLead (){
+        addNew.click();
+        clickOnElement(addLead);
+        sleepThread(2000);
+        return PageFactory.initElements(webDriver, AddNewLeadMo.class);
     }
 
     public AddNewExtraShootMo createNewExtraShoot (String jobName) {
