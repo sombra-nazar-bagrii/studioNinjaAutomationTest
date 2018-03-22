@@ -2,6 +2,7 @@ package pageobject.singUp;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.session.StripAnyPlatform;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -51,33 +52,38 @@ public class SingUp extends Page {
      @FindBy(xpath = ".//*[@data-autotest-button='signUp']")
      private WebElement singUpButton;
 
-     private static String TEMP_MAIL = "https://temp-mail.org/uk/";
-     private static String LOGIN_PAGE = "https://snfrankfurt.servehttp.com/login";
+     private static String TEMP_MAIL = "https://www.tempmailaddress.com/";
      private static String CURRENCY = "EUR - Euro";
      private static String TIME_ZONE = "(+02:00) Europe - Kiev";
+     private static String USED_COMPANY_NAME = "";
+     private static String PASS = "qweqwe";
 
-    ArrayList <String> credentials = new ArrayList();
+    private ArrayList <String> credentials = new ArrayList();
 
     public SingUp(WebDriver webDriver) {
         super(webDriver);
     }
 
+
+
     protected void enterInfoOfNewUser(){
-        String parentHandle = webDriver.getWindowHandle();       // take handle for return back to SN
-        String pass = generateString();
+        String newEmail = goToTempMailPage().setupTempEmail();
+        webDriver.get(HOME_URL + "signup");
         customClearAndSendValue(companyName, generateString());
         customClearAndSendValue(firstName, generateString());
-        String newEmail = goToTempMailPage().returnNewEMailAndGoBackToSN().getTempEmail();
-        webDriver.close();
-        webDriver.switchTo().window(parentHandle);               // go back to SN
         customClearAndSendValue(emailAddress, newEmail);
-        customClearAndSendValue(password, pass);
-        customClearAndSendValue(confirmPassword, pass);
+        customClearAndSendValue(password, PASS);
+        customClearAndSendValue(confirmPassword, PASS);
+        /*
+        checkAllSelectedOptions(currency);
+        checkAllSelectedOptions(timezone);
+        */
         customSelectByVisibleText(currency,CURRENCY);
         customSelectByVisibleText(timezone,TIME_ZONE);
         clickOnElement(termsAndPolicyCheckBox);
         clickOnElement(singUpButton);
-        credentials.add(pass);
+        sleepThread(5000);
+        credentials.add(PASS);
         credentials.add(newEmail);
 
       /*  Integer sum = credentials
@@ -92,17 +98,15 @@ public class SingUp extends Page {
         MyInterface myInterface = something -> "hellow world";
       */
     }
-
     public Dashboard singUpNewUser(){
         enterInfoOfNewUser();
-        //webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        String pageHandle = webDriver.getWindowHandle();
-        goToTempMailPage().confirmMail();
-        webDriver.close();
-        webDriver.switchTo().window(pageHandle);
-        webDriver.get(LOGIN_PAGE);
-        SingIn singIn = PageFactory.initElements(webDriver, SingIn.class);
-        singIn.enterByExistingUser(credentials.get(1), credentials.get(0));
+        goToTempMailPage()
+                .confirmMail()
+                .enterByExistingUser(
+                        credentials.get(1),
+                        credentials.get(0),
+                        false);
+
         return PageFactory.initElements(webDriver, Dashboard.class);
     }
 
@@ -117,7 +121,7 @@ public class SingUp extends Page {
     */
 
     public TempMail goToTempMailPage() {
-        openNewWindow(TEMP_MAIL);
+        webDriver.get(TEMP_MAIL);
         return PageFactory.initElements(webDriver, TempMail.class);
     }
 

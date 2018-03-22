@@ -43,9 +43,13 @@ public class SingIn extends Page {
         super(webDriver);
     }
 
-    public void enterByExistingUser(String mail, String pass){
+    public void enterByExistingUser(String mail, String pass, boolean stayIn){
         customClearAndSendValue(email, mail);
         customClearAndSendValue(password, pass);
+        if(stayIn)
+        {
+            clickOnElement(staySignedIn);
+        }
         clickOnElement(staySignedIn);
          try {
             singInButton.click();

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobject.Page;
+import pageobject.singIn.SingIn;
 import pageobject.singUp.SingUp;
 
 
@@ -17,26 +18,48 @@ import pageobject.singUp.SingUp;
 
 public class TempMail extends Page {
 
-    @FindBy(xpath = ".//*[@id='mail']")
+    @FindBy(xpath = ".//*[@href='/edit']")
+    private WebElement editEmail;
+
+    @FindBy(xpath = ".//*[@name='emailInput']")
+    private WebElement newEmail;
+
+    @FindBy(xpath = " .//*[@id='emailFormBtn']")
+    private WebElement confirmNewEmail;
+
+    @FindBy(xpath = ".//*[@id='email']")
     private WebElement email;
 
-    @FindBy(xpath = ".//*[@id='mails']")
-    private WebElement mailsSection;
+    @FindBy(xpath = "(.//*[@id='schranka']//*[contains(text(), 'Are you a real Ninja?')])[1]/..")
+    private WebElement mailFromSN;
 
-    @FindBy (xpath = ".//a[contains(text(), 'Studio Ninja')]")
-    private WebElement mail;
+    @FindBy(xpath = ".//*[contains(@href, '" + HOME_URL + "')]")
+    private WebElement confirmLink;
 
-    private String textEmail;
+    @FindBy(xpath = "(.//*[contains(text(), '1 day')])[2]")
+    private WebElement expirationTime;
+
 
     public TempMail(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void confirmMail(){
+    public String setupTempEmail(){
+        clickOnElement(editEmail);
+        customSendKeys(newEmail, generateString());
+        clickOnElement(confirmNewEmail);
+        sleepThread(2000);
+        clickOnElement(expirationTime);
+        waitForElement(email, webDriver, 5);
+        return email.getText();
+    }
+
+    public SingIn confirmMail(){
         WebDriverWait wait = new WebDriverWait(webDriver, 120);
-        wait.until(ExpectedConditions.elementToBeClickable(mail));
-        clickOnElement(mail);
-        webDriver.findElement(By.xpath("//a[contains(text(), 'Not a robot')]")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(mailFromSN));
+        hardClick(webDriver, mailFromSN);
+        webDriver.get(confirmLink.getAttribute("href"));
+        return PageFactory.initElements(webDriver, SingIn.class);
     }
 
     public SingUp returnNewEMailAndGoBackToSN(){

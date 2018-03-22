@@ -9,28 +9,25 @@ import org.testng.annotations.Test;
  */
 
 public class CreateUser extends TestBase {
-    private static String EMAIL = "taras.makar@sombrainc.com";
-    private static String PASSWORD = "testtest";
+    private static String EMAIL = "nazar.bagrii@sombrainc.com";
+    private static String PASSWORD = "qweqwe";
+    private static boolean STAYSIGNED = true;
 
-    @Test (priority = 1, enabled = false)
+    @Test (priority = 1, enabled = true)
     public void checkIfErrorMessageValid(){
         Assert.assertTrue(startPage2.checkIfErrorMessageCorrect(EMAIL, PASSWORD));
     }
 
-    @Test (priority = 0, enabled = false)
+    @Test (priority = 0, enabled = true)
     public void verifyIfWeCanRegistrationProcess(){
-        try{
             startPage2.openSingUpPage().singUpNewUser();
             System.out.println("Process of registration of new user completed successfully");
-        }catch (Exception e){
-            Assert.fail("Failed registration!!");
-        }
     }
 
-    @Test (priority = 0, enabled = true)
+    @Test (priority = 0, enabled = false)
     public void logInByExistedUser(){
         try {
-            startPage2.enterByExistingUser(EMAIL, PASSWORD);
+            startPage2.enterByExistingUser(EMAIL, PASSWORD, STAYSIGNED);
         } catch (Exception e){
             Assert.fail("Failed login!!");
         }

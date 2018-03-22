@@ -12,10 +12,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageobject.header.Header;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -29,6 +32,7 @@ public abstract class Page {
     FileInputStream file;
     Properties property = new Properties();
 
+    protected static final String HOME_URL = "https://app.studioninja.co/";
     protected final String CLIENT_NAME = "Client";
     protected final boolean modalsWithCC = true;
     protected final String ERROR_TYPE = "error";
@@ -108,16 +112,21 @@ public abstract class Page {
     }
 
     protected void openNewWindow(String URL){
-        webDriver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "n");
+        ((JavascriptExecutor)webDriver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<String>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(tabs.get(1));
+        /*
+        webDriver.findElement(By.cssSelector("body")).sendKeys(Keys.COMMAND + "t");
         for (String winHandle : webDriver.getWindowHandles()) {
             System.out.println(winHandle);
             webDriver.switchTo().window(winHandle);
         }
+        */
         webDriver.get(URL);
     }
 
     protected void openNextTab(){
-        String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,Keys.TAB);
+        String selectLinkOpeninNewTab = Keys.chord(Keys.COMMAND,Keys.TAB);
         webDriver.findElement(By.cssSelector("body")).sendKeys(selectLinkOpeninNewTab);
     }
 
@@ -186,7 +195,7 @@ public abstract class Page {
         Select sel = new Select(element);
         for(int i = 0; i < sel.getOptions().size(); i ++){
             customSelectByIndex(element, i);
-            webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         }
     }
 
