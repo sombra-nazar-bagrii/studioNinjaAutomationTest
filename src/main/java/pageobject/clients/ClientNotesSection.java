@@ -9,7 +9,7 @@ import pageobject.Page;
  * Created by sombra-15 on 14.09.17.
  */
 
-public class ClientNotes extends Page{
+public class ClientNotesSection extends Page{
     private static String text = "Nazar ";
 
     @FindBy (xpath = "(.//*[starts-with(@id,'taTextElement')])[3]")
@@ -51,7 +51,7 @@ public class ClientNotes extends Page{
     @FindBy (xpath = ".//*[@ng-click='saveNotes()']")
     private WebElement saveChanges;
 
-    public ClientNotes(WebDriver webDriver) {
+    public ClientNotesSection(WebDriver webDriver) {
         super(webDriver);
     }
 

@@ -6,9 +6,9 @@ import pageobject.Page;
 /**
  * Created by sombra-15 on 08.09.17.
  */
-public class AddNewAppointmentMo extends Page {
+public class AddNewAppointmentModal extends Page {
 
-    public AddNewAppointmentMo(WebDriver webDriver) {
+    public AddNewAppointmentModal(WebDriver webDriver) {
         super(webDriver);
     }
 }

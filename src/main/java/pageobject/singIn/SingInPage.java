@@ -6,15 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pageobject.Page;
-import pageobject.forgotPassword.ForgotPassword;
-import pageobject.singUp.SingUp;
+import pageobject.forgotPassword.ForgotPasswordPage;
+import pageobject.singUp.SingUpPage;
 import static java.lang.System.*;
 
 /**
  * Created by sombra-15 on 14.07.17.
  */
 
-public class SingIn extends Page {
+public class SingInPage extends Page {
 
   //  public static final Logger LOGGER = LoggerFactory.getLogger(Page.class);
 
@@ -39,7 +39,7 @@ public class SingIn extends Page {
     private static String TITLE = "Houston, we have a problem!";
     private static String MESSAGE = "Incorrect email or password.";
 
-    public SingIn(WebDriver webDriver) {
+    public SingInPage(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -73,16 +73,16 @@ public class SingIn extends Page {
         }
     }
 
-    public SingUp openSingUpPage (){
+    public SingUpPage openSingUpPage (){
         waitForElement(singUpButton, webDriver,5);
         clickOnElement(singUpButton);
-        return PageFactory.initElements(webDriver, SingUp.class);
+        return PageFactory.initElements(webDriver, SingUpPage.class);
     }
 
-    public ForgotPassword goToForgotPasswordPage(){
+    public ForgotPasswordPage goToForgotPasswordPage(){
         waitForElement(forgotPassword, webDriver, 5);
         clickOnElement(forgotPassword);
-        return PageFactory.initElements(webDriver, ForgotPassword.class);
+        return PageFactory.initElements(webDriver, ForgotPasswordPage.class);
     }
 
 }

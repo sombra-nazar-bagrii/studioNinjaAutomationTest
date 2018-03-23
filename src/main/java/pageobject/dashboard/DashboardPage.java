@@ -7,23 +7,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pageobject.Page;
-import pageobject.jobsOverview.SomeJobPage;
-import pageobject.modalForms.AddNewAppointmentMo;
-import pageobject.modalForms.AddNewExtraShootMo;
-import pageobject.modalForms.AddNewJobMo;
-import pageobject.modalForms.AddNewLeadMo;
+import pageobject.modalForms.AddNewAppointmentModal;
+import pageobject.modalForms.AddNewExtraShootModal;
+import pageobject.modalForms.AddNewJobModal;
+import pageobject.modalForms.AddNewLeadModal;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by sombra-15 on 12.07.17.
  */
 
-public class Dashboard extends Page {
+public class DashboardPage extends Page {
 
-    private final static String JOB_NAME = "Job from Dashboard for checking upcoming section";
+    private final static String JOB_NAME = "Job from DashboardPage for checking upcoming section";
 
     @FindBy(xpath = ".//*[@ng-model='jobsLeadDateItem']")
     private WebElement leadsSelect;
@@ -65,35 +62,35 @@ public class Dashboard extends Page {
     @FindBy()
     private List <WebElement> overdueAndcomingPayments;
 */
-    public Dashboard(WebDriver webDriver) {
+    public DashboardPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public AddNewJobMo createNewJob (){
+    public AddNewJobModal createNewJob (){
         addNew.click();
         clickOnElement(addJob);
         sleepThread(2000);
-        return PageFactory.initElements(webDriver, AddNewJobMo.class);
+        return PageFactory.initElements(webDriver, AddNewJobModal.class);
     }
-    public AddNewLeadMo createNewLead (){
+    public AddNewLeadModal createNewLead (){
         addNew.click();
         clickOnElement(addLead);
         sleepThread(2000);
-        return PageFactory.initElements(webDriver, AddNewLeadMo.class);
+        return PageFactory.initElements(webDriver, AddNewLeadModal.class);
     }
 
-    public AddNewExtraShootMo createNewExtraShoot (String jobName) {
+    public AddNewExtraShootModal createNewExtraShoot (String jobName) {
         waitForElement(addNew, webDriver, 10);
         addNew.click();
         clickOnElement(addExtrashoot);
-        return PageFactory.initElements(webDriver, AddNewExtraShootMo.class);
+        return PageFactory.initElements(webDriver, AddNewExtraShootModal.class);
     }
 
-    public AddNewAppointmentMo createNewAppointment (){
+    public AddNewAppointmentModal createNewAppointment (){
         waitForElement(addNew, webDriver, 10);
         addNew.click();
         clickOnElement(addAppointment);
-        return PageFactory.initElements(webDriver, AddNewAppointmentMo.class);
+        return PageFactory.initElements(webDriver, AddNewAppointmentModal.class);
     }
 
     public boolean checkIfUpcomingSectionWorks(){
@@ -103,9 +100,9 @@ public class Dashboard extends Page {
     private boolean checkIfUpcomingSectionWorksJob( ) {
         if (isElementDisplayed(noUpcomingLabel)) {
             createNewJob()
-                    .createJob(
+                    .createNewJob(
                             JobConfigurationFactory.getConfiguration("JobConf1"),
-                            JOB_NAME, "Dashboard");
+                            JOB_NAME, "DashboardPage");
             waitSomeSec(webDriver, 5);
             returnHeader()
                     .goToDashboard();
@@ -113,14 +110,12 @@ public class Dashboard extends Page {
         clickOnElement(upcomingShoots.get(0));
         waitSomeSec(webDriver, 5);
         // TODO return isElementDisplayed
-        if(isElementDisplayed(webDriver.findElement(By.xpath("(.//*[@id='main-wrapper']//h2)[1]")))){
-            return true;
-        } else return false;
+        return isElementDisplayed(webDriver.findElement(By.xpath("(.//*[@id='main-wrapper']//h2)[1]")));
     }
 
     public boolean checkIfElementDisplayedInUpcomingSection(){
         // TODO invert
-        if(upcomingShoots.get(0).findElement(By.xpath("//span")).getText().equals(JOB_NAME)){
+        if(JOB_NAME.equals(upcomingShoots.get(0).findElement(By.xpath("//span")).getText())){
             System.out.println("Job displayed");
             return true;
         }else {

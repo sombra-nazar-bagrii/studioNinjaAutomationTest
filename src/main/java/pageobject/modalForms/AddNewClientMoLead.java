@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pageobject.ClientConfiguration;
 import pageobject.Page;
-import pageobject.clients.Clients;
-import pageobject.clients.SomeClient;
+import pageobject.clients.ClientsOverviewPage;
+import pageobject.clients.ClientProfilePage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -75,7 +75,7 @@ public class AddNewClientMoLead extends Page {
 
     Random rand = new Random();
 
-    public Clients createNewClient() {
+    public ClientsOverviewPage createNewClient() {
         List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country);
         if (isClientCompany.trim().equalsIgnoreCase("Yes")) {
             clickOnElement(clientIsACompanyBox);
@@ -94,10 +94,10 @@ public class AddNewClientMoLead extends Page {
                 ClientConfiguration.getFirstName().replaceAll(" ","") + rand.nextInt(99) +"@" + ClientConfiguration.getLastName() + ".com");
         saveClient.click();
         sleepThread(1500);
-        return PageFactory.initElements(webDriver, Clients.class);
+        return PageFactory.initElements(webDriver, ClientsOverviewPage.class);
     }
 
-    public SomeClient editClientInformation(){
+    public ClientProfilePage editClientInformation(){
         List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country);
         if (isClientCompany.trim().equalsIgnoreCase("Yes")) {
             clickOnElement(clientIsACompanyBox);
@@ -110,6 +110,6 @@ public class AddNewClientMoLead extends Page {
                 email,
                 ClientConfiguration.getFirstName() + "@" + ClientConfiguration.getLastName() + ".com");
         clickOnElement(saveClient);
-        return PageFactory.initElements(webDriver, SomeClient.class);
+        return PageFactory.initElements(webDriver, ClientProfilePage.class);
     }
 }

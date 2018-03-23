@@ -12,8 +12,6 @@ import tests.TestBase;
  */
 public class CreatingJobFromClientOverview extends TestBase {
 
-    private final String PLACE = "clientPage";
-
     @DataProvider
     public Object[][] getJobPositiveConfig(){
         return new Object[][]{
@@ -30,10 +28,10 @@ public class CreatingJobFromClientOverview extends TestBase {
         startPage.goToClientsSection()
                 .goToSomeClientPage()
                 .addNewJob()
-                .createJob(
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName,
-                        PLACE);
+                        CLIENT_OVERVIEW_PAGE);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 
@@ -52,10 +50,10 @@ public class CreatingJobFromClientOverview extends TestBase {
         startPage.goToClientsSection()
                 .goToSomeClientPage()
                 .addNewJob()
-                .createJob(
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName,
-                        PLACE);
+                        CLIENT_OVERVIEW_PAGE);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 }

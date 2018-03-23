@@ -5,16 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import pageobject.Page;
-import pageobject.modalForms.AddNewJobMo;
-
-import java.util.List;
+import pageobject.modalForms.AddNewJobModal;
 
 /**
  * Created by sombra-15 on 14.09.17.
  */
-public class SendEmailFromClients extends Page {
+public class SendEmailFromClientsOverviewModal extends Page {
 
     @FindBy(xpath = ".//*[@id = 'sendContactEmailModal']//*[@data-autotest-button='close']")
     private WebElement closeBut;
@@ -46,11 +43,11 @@ public class SendEmailFromClients extends Page {
     @FindBy(xpath = ".//*[@id = 'newJob']")
     private WebElement newJobModal;
 
-    public SendEmailFromClients(WebDriver webDriver) {
+    public SendEmailFromClientsOverviewModal(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public void fillAllModFields(){
+    public void fillAllModalFields(){
          if (getElementOptionsSize(emailTemplate) >1){
 
          }
@@ -65,11 +62,11 @@ public class SendEmailFromClients extends Page {
         return webElement.findElements(By.tagName("option")).size();
     }
 
-    public AddNewJobMo addNewJob(){
+    public AddNewJobModal addNewJob(){
         sleepThread(1000);
         clickOnElement(addANewJob);
         waitForElement(newJobModal, webDriver, 20);
-        return PageFactory.initElements(webDriver, AddNewJobMo.class);
+        return PageFactory.initElements(webDriver, AddNewJobModal.class);
     }
 }
 

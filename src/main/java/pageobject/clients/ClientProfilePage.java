@@ -5,9 +5,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import Factory.JobConfigurationFactory;
 import pageobject.Page;
-import pageobject.jobsOverview.SomeJobPage;
-import pageobject.modalForms.AddNewClientMo;
-import pageobject.modalForms.AddNewJobMo;
+import pageobject.jobsOverview.JobProfilePage;
+import pageobject.modalForms.AddNewClientModal;
+import pageobject.modalForms.AddNewJobModal;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * Created by sombra-15 on 13.09.17.
  */
 
-public class SomeClient extends Page {
+public class ClientProfilePage extends Page {
 
     private final By pathToIcons = By.xpath(".//h2[contains(@class, 'jobs-cell-title')]/i");
 
@@ -49,16 +49,16 @@ public class SomeClient extends Page {
     @FindBy(xpath = ".//*[@id = 'newJob']")
     private WebElement newJobModal;
 
-    public SomeClient(WebDriver webDriver) {
+    public ClientProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public AddNewJobMo addNewJob(){
+    public AddNewJobModal addNewJob(){
         waitForElements(pathToIcons, webDriver, 5);
         sleepThread(1000);
         clickOnElement(addNewJob);
         waitForElement(newJobModal, webDriver, 20);
-        return PageFactory.initElements(webDriver, AddNewJobMo.class);
+        return PageFactory.initElements(webDriver, AddNewJobModal.class);
     }
 
     public boolean checkIfJobCreated(String jobName){
@@ -105,31 +105,26 @@ public class SomeClient extends Page {
         return count == 1;
     }
 
-    public AddNewClientMo editClientInfo (){
+    public AddNewClientModal editClientInfo (){
         waitForElement(editClientProfile, webDriver, 10);
         clickOnElement(editClientProfile);
-        return PageFactory.initElements(webDriver, AddNewClientMo.class);
+        return PageFactory.initElements(webDriver, AddNewClientModal.class);
     }
 
-    public ClientNotes editClientNotes(){
+    public ClientNotesSection editClientNotes(){
         waitForElement(editClNotes, webDriver, 10);
         clickOnElement(editClNotes);
-        return PageFactory.initElements(webDriver, ClientNotes.class);
+        return PageFactory.initElements(webDriver, ClientNotesSection.class);
     }
 
-    public SomeJobPage goToSomeJob(String jName){
+    public JobProfilePage goToSomeJob(String jName){
         if (jobs.size() == 0){
-            System.out.println("This user haven't any job");
-            addNewJob().createJob(
+            addNewJob()
+                    .createNewJob(
                     JobConfigurationFactory.getConfiguration("conf1"),
                     "Job from client page", "clientPage");
         }
-        return PageFactory.initElements(webDriver, SomeJobPage.class);
-    }
-
-    private void script (){
-        JavascriptExecutor jas = (JavascriptExecutor) webDriver;
-        ((JavascriptExecutor) webDriver).executeScript("document.addEventListener(\"DOMContentLoaded\", function(event) { console.log(\"DOM fully loaded and parsed\");});");
+        return PageFactory.initElements(webDriver, JobProfilePage.class);
     }
 }
 

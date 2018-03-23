@@ -11,7 +11,6 @@ import tests.TestBase;
  */
 
 public class CreatingJobFromSendEmail extends TestBase {
-    private final String PLACE = "clientEmail";
 
     @DataProvider
     public Object[][] getJobPositiveConfig(){
@@ -29,10 +28,10 @@ public class CreatingJobFromSendEmail extends TestBase {
         startPage.goToClientsSection()
                 .goToSendEmailMo()
                 .addNewJob()
-                .createJob(
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName,
-                        PLACE);
+                        CLIENT_SEND_MODAL);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 
@@ -50,10 +49,10 @@ public class CreatingJobFromSendEmail extends TestBase {
         startPage.goToClientsSection()
                 .goToSendEmailMo()
                 .addNewJob()
-                .createJob(
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName,
-                        PLACE);
+                        CLIENT_SEND_MODAL);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 }

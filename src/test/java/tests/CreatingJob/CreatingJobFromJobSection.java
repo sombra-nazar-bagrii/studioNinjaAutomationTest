@@ -12,7 +12,6 @@ import tests.TestBase;
  */
 public class CreatingJobFromJobSection extends TestBase {
 
-    private final String PLACE = "Job";
     //Positive test cases
     @DataProvider
     public Object[][] getJobPositiveConf(){
@@ -29,9 +28,10 @@ public class CreatingJobFromJobSection extends TestBase {
     public void jobFromJobOverviewSectionPositive(String configType, String jobName) {
         startPage.goToJobsOverviewSection()
                 .addNewJob()
-                .createJob(JobConfigurationFactory.getConfiguration(configType)
+                .createNewJob(
+                        JobConfigurationFactory.getConfiguration(configType)
                         , jobName
-                        , PLACE);
+                        , JOBS_OVERVIEW_PAGE);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
 
     }
@@ -50,10 +50,10 @@ public class CreatingJobFromJobSection extends TestBase {
     public void jobFromJobOverviewSectionNegative (String configType, String jobName){
         startPage.goToJobsOverviewSection()
                 .addNewJob()
-                .createJob(
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType)
                         , jobName
-                        , PLACE);
+                        , JOBS_OVERVIEW_PAGE);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
 
     }

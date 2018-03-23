@@ -8,7 +8,7 @@ import pageobject.Page;
 /**
  * Created by sombra-15 on 09.08.17.
  */
-public class ForgotPassword extends Page {
+public class ForgotPasswordPage extends Page {
 
     @FindBy (id = "email")
     private WebElement email;
@@ -19,7 +19,7 @@ public class ForgotPassword extends Page {
     @FindBy (xpath = ".//*[@href='/login']")
     private WebElement back;
 
-    public ForgotPassword(WebDriver webDriver) {super(webDriver);}
+    public ForgotPasswordPage(WebDriver webDriver) {super(webDriver);}
 
 
 }

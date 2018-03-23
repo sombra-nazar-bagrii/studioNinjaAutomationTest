@@ -4,16 +4,15 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pageobject.Page;
-import pageobject.modalForms.AddNewClientMo;
+import pageobject.modalForms.AddNewClientModal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by sombra-15 on 12.07.17.
  */
 
-public class Clients extends Page {
+public class ClientsOverviewPage extends Page {
 
     @FindBy(xpath = "//button[@data-autotest-button='addNewClient']")//+
     private WebElement addNewClientButton;
@@ -43,28 +42,28 @@ public class Clients extends Page {
     @FindBy(xpath = ".//*[@title='Sort by email']")
     private WebElement email;
 
-    public Clients(WebDriver webDriver) {
+    public ClientsOverviewPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public AddNewClientMo addNewClient(){
+    public AddNewClientModal addNewClient(){
         waitForElement(addNewClientButton,webDriver,10);
         clickOnElement(addNewClientButton);
-        return PageFactory.initElements(webDriver, AddNewClientMo.class);
+        return PageFactory.initElements(webDriver, AddNewClientModal.class);
     }
 
     private void sendKeysToSearchInput(String text){
         customSendKeys(searchInput,text);
     }
 
-    public SendEmailFromClients goToSendEmailMo(){
+    public SendEmailFromClientsOverviewModal goToSendEmailMo(){
         openPage(".//*[@sn-text = 'Send Email']");
-        return PageFactory.initElements(webDriver, SendEmailFromClients.class);
+        return PageFactory.initElements(webDriver, SendEmailFromClientsOverviewModal.class);
     }
 
-    public SomeClient goToSomeClientPage(){
+    public ClientProfilePage goToSomeClientPage(){
         openPage(".//*[@sn-text = 'View']");
-        return PageFactory.initElements(webDriver, SomeClient.class);
+        return PageFactory.initElements(webDriver, ClientProfilePage.class);
     }
 
     public void EditClientInfo(){

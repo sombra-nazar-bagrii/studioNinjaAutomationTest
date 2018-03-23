@@ -11,7 +11,7 @@ import tests.TestBase;
  */
 public class CreatingLeadFromDashboard extends TestBase {
 
-    private final String PLACE = "Dashboard";
+    private final String PLACE = "DashboardPage";
 
     // Positive test cases
     @DataProvider

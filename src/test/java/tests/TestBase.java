@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pageobject.header.Header;
-import pageobject.singIn.SingIn;
+import pageobject.singIn.SingInPage;
 
 import java.io.*;
 import java.util.Arrays;
@@ -20,19 +20,16 @@ import java.util.Properties;
  */
 public class TestBase {
     protected Header startPage;
-    protected SingIn startPage2;
+    protected SingInPage startPage2;
     private static WebDriver webDriver;
-    static final Properties properties = new Properties();
+    protected static final String DASHBOARD_PAGE = "Dashboard";
+    protected static final String CLIENT_OVERVIEW_PAGE = "Clients overview";
+    protected static final String JOBS_OVERVIEW_PAGE = "Jobs Overview";
+    protected static final String CLIENT_SEND_MODAL = "Send email to client";
+    protected static final String CALENDAR_BUTTON = "Calendar button";
+    protected static final String CALENDAR_WEEK_SECTION = "Calendar week section";
+    protected static final String CALENDAR_MONTH_SECTION = "Calendar month section";
 
-/*
-    static {
-        try (FileInputStream file = new FileInputStream("src/main/resources/properties.properties")){
-            properties.load(file);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-*/
     @Parameters({ "browserName" })
     @BeforeSuite
     public void init(String browserName) throws Exception {
@@ -43,7 +40,7 @@ public class TestBase {
     @BeforeMethod
     public void includeExclude(){
         startPage = PageFactory.initElements(webDriver,Header.class);
-        startPage2 = PageFactory.initElements(webDriver, SingIn.class);
+        startPage2 = PageFactory.initElements(webDriver, SingInPage.class);
     }
     @AfterMethod
     public void afterMethod(ITestResult testResult) throws IOException {

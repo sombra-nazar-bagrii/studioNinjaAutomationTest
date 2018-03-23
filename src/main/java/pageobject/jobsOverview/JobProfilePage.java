@@ -8,12 +8,12 @@ import pageobject.Page;
 /**
  * Created by sombra-15 on 14.09.17.
  */
-public class SomeJobPage extends Page{
+public class JobProfilePage extends Page{
 
     @FindBy(xpath = "(.//*[@id='main-wrapper']//h2)[1]")
     private WebElement jobName;
 
-    public SomeJobPage(WebDriver webDriver) {
+    public JobProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
 

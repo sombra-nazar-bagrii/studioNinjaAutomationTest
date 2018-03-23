@@ -12,8 +12,6 @@ import tests.TestBase;
  */
 public class CreatingJobFromDashboard extends TestBase {
 
-    private final String PLACE = "Dashboard";
-
     // Positive test cases
     @DataProvider
     public Object[][] getJobPositiveConf(){
@@ -30,10 +28,10 @@ public class CreatingJobFromDashboard extends TestBase {
     public void jobFromDashboard(String configType, String jobName){
         startPage.goToDashboard()
                 .createNewJob()
-                .createJob(
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName,
-                        PLACE);
+                        DASHBOARD_PAGE);
 
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
@@ -53,59 +51,11 @@ public class CreatingJobFromDashboard extends TestBase {
     public void jobFromDashboardNegative (String configType, String jobName){
         startPage.goToDashboard()
                 .createNewJob()
-                .createJob(
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName,
-                        PLACE);
+                        DASHBOARD_PAGE);
 
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
-
-
-
-
-    /*
-
-    @Test (priority = 2, enabled = false)
-    public void jobFromJobsSection(){
-        startPage.goToJobsOverviewSection()
-                .addNewJob()
-                .createJob(
-                        JobConfigurationFactory.getConfiguration("JobConf2"),
-                        "Job from jobs overview");
-    }
-
-    @Test (priority = 3, enabled = false)
-    public void jobFromCalendar(){
-
-    }
-
-    @Test (enabled = false)
-    public void jobFromClientsOverview(){
-
-        startPage.goToClientsSection()
-                .addNewClient()
-                .createNewClient()
-                .goToSomeClientPage()
-                .addNewJob()
-                .createJob(
-                        JobConfigurationFactory.getConfiguration("JobConf3"),
-                        "Job from client page");
-    }
-
-    @Test (priority = 3, enabled = false)
-    public void jobFromClientEmail(){
-        startPage.goToClientsSection();
-    }
-
-    /*
-    @Test(priority = 1, enabled = false)
-    public void jobFromDashboard(){
-        startPage.goToDashboard()
-                .createNewJob()
-                .createJob(
-                        JobConfigurationFactory.getConfiguration("config2"),
-                        "Job from dashboard");
-    }
-*/
 }

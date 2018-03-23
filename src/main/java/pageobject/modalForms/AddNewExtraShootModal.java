@@ -6,9 +6,9 @@ import pageobject.Page;
 /**
  * Created by sombra-15 on 08.09.17.
  */
-public class AddNewExtraShootMo extends Page {
+public class AddNewExtraShootModal extends Page {
 
-    public AddNewExtraShootMo(WebDriver webDriver) {
+    public AddNewExtraShootModal(WebDriver webDriver) {
         super(webDriver);
     }
 }

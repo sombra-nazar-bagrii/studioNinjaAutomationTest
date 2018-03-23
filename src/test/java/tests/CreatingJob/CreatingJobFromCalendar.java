@@ -6,16 +6,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tests.TestBase;
 
-import java.util.Random;
-
 /**
  * Created by sombramac-8 on 12/28/17.
  */
 public class CreatingJobFromCalendar extends TestBase {
 
-    private final String PLACE1 = "CalendarM";
-    private final String PLACE2 = "CalendarW";
-    private final String PLACE3 = "Calendar";
     private final String month = "April";
 
     @DataProvider
@@ -33,32 +28,32 @@ public class CreatingJobFromCalendar extends TestBase {
     public void jobsFromCalendarPagePos(String configType, String jobName){
         startPage.goToCalendar()
                 .createNewJobUsingButton()
-                .createJob(
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName + '4',
-                        PLACE3);
+                        CALENDAR_BUTTON);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 
     @Test(dataProvider = "getJobPositiveConfig", priority = 3)
     public void jobsFromCalendarPageMonthPos(String configType, String jobName){
         startPage.goToCalendar()
-                .createNewJobMonth(month)
-                .createJob(
+                .createNewJobUsingMonthSection(month)
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName + '5',
-                        PLACE1);
+                        CALENDAR_MONTH_SECTION);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 
     @Test(dataProvider = "getJobPositiveConfig", priority = 5)
     public void jobsFromCalendarPageWeekPos(String configType, String jobName){
         startPage.goToCalendar()
-                .createNewJobWeek()
-                .createJob(
+                .createNewJobUsingWeekSection()
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName + '6',
-                        PLACE2);
+                        CALENDAR_WEEK_SECTION);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 
@@ -76,10 +71,10 @@ public class CreatingJobFromCalendar extends TestBase {
     public void jobsFromCalendarPageNeg (String configType, String jobName){
         startPage.goToCalendar()
                 .createNewJobUsingButton()
-                .createJob(
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName + '4',
-                        PLACE3);
+                        CALENDAR_BUTTON);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 
@@ -96,11 +91,11 @@ public class CreatingJobFromCalendar extends TestBase {
     @Test(dataProvider = "getJobNegativeConfM", priority = 4)
     public void jobsFromCalendarPageMonthNeg (String configType, String jobName){
         startPage.goToCalendar()
-                .createNewJobMonth(month)
-                .createJob(
+                .createNewJobUsingMonthSection(month)
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName + '5',
-                        PLACE1);
+                        CALENDAR_MONTH_SECTION);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 
@@ -116,11 +111,11 @@ public class CreatingJobFromCalendar extends TestBase {
     @Test(dataProvider = "getJobNegativeConfW", priority = 6)
     public void jobsFromCalendarPageWeekNeg (String configType, String jobName){
         startPage.goToCalendar()
-                .createNewJobWeek()
-                .createJob(
+                .createNewJobUsingWeekSection()
+                .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
                         jobName + '6',
-                        PLACE2);
+                        CALENDAR_WEEK_SECTION);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
 }

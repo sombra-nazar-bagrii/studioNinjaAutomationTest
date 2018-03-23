@@ -1,17 +1,15 @@
 package pageobject.calendar;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobject.Page;
-import pageobject.header.Header;
-import pageobject.modalForms.AddNewAppointmentMo;
-import pageobject.modalForms.AddNewExtraShootMo;
-import pageobject.modalForms.AddNewJobMo;
+import pageobject.modalForms.AddNewAppointmentModal;
+import pageobject.modalForms.AddNewExtraShootModal;
+import pageobject.modalForms.AddNewJobModal;
 
 import java.time.Month;
 import java.util.*;
@@ -21,7 +19,7 @@ import java.util.*;
  * Created by sombra-15 on 12.07.17.
  */
 // TODO change name to *Page
-public class CalendarP extends Page {
+public class CalendarPage extends Page {
 
     // TODO use java.time classes
     private Calendar c = Calendar.getInstance();
@@ -30,9 +28,7 @@ public class CalendarP extends Page {
     private String afterMonth = "";
     private String weekView = "Week view";
     private String monthView = "Month view";
-    private String appointment = "Appointment";
-    private String job = "Main shoot";
-    private String extraShoot = "Extra Shoot";
+
     // TODO move to method, because it's not threadsafe
     Random r = new Random();
 
@@ -93,47 +89,48 @@ public class CalendarP extends Page {
     @FindBy(xpath = ".//*[@id='addNewModal']")
     private WebElement addNewModalForm;
 
-    public CalendarP(WebDriver webDriver) {
+    public CalendarPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public AddNewJobMo createNewJobUsingButton (){
+
+    public AddNewJobModal createNewJobUsingButton (){
         waitForElement(addNew, webDriver, 10);
         addNew.click();
         sleepThread(10000);
         waitForElement(addJob, webDriver, 10);
         clickOnElement(addJob);
-        return PageFactory.initElements(webDriver, AddNewJobMo.class);
+        return PageFactory.initElements(webDriver, AddNewJobModal.class);
     }
-    public AddNewJobMo createNewJobMonth (String month){
+    public AddNewJobModal createNewJobUsingMonthSection(String month){
         waitForElement(addNew, webDriver, 10);
         monthNavigation(getRandDate(), month);
         clickOnElement(addJob);
         waitForElement(newJobModal, webDriver, 7);
-        return PageFactory.initElements(webDriver, AddNewJobMo.class);
+        return PageFactory.initElements(webDriver, AddNewJobModal.class);
     }
 
-    public AddNewJobMo createNewJobWeek (){
+    public AddNewJobModal createNewJobUsingWeekSection(){
         waitForElement(week, webDriver, 10);
         chooseWeekSection();
         clickOnElement(viewMore);
         clickOnElement(chooseJobTime(weekList));
         waitForElement(newJobModal, webDriver, 7);
-        return PageFactory.initElements(webDriver, AddNewJobMo.class);
+        return PageFactory.initElements(webDriver, AddNewJobModal.class);
     }
 
-    public AddNewExtraShootMo createNewExtraShoot (String jobName) {
+    public AddNewExtraShootModal createNewExtraShootUsingButton (String jobName) {
         waitForElement(addNew, webDriver, 10);
         addNew.click();
         clickOnElement(addExtrashoot);
-        return PageFactory.initElements(webDriver, AddNewExtraShootMo.class);
+        return PageFactory.initElements(webDriver, AddNewExtraShootModal.class);
     }
 
-    public AddNewAppointmentMo createNewAppointment (){
+    public AddNewAppointmentModal createNewAppointmentUsingButton (){
         waitForElement(addNew, webDriver, 10);
         addNew.click();
         clickOnElement(addAppointment);
-        return PageFactory.initElements(webDriver, AddNewAppointmentMo.class);
+        return PageFactory.initElements(webDriver, AddNewAppointmentModal.class);
     }
 
     public boolean checkIfLinkToDashboardWorks(){
@@ -141,65 +138,51 @@ public class CalendarP extends Page {
         clickOnElement(dashboadLink);
         return returnHeader()
                 .whichSectionIsSelected()
-                .equalsIgnoreCase("Dashboard");
+                .equalsIgnoreCase("DashboardPage");
     }
 
-    private CalendarP goToNextCallendarPage(){
+    private CalendarPage goToNextCalendarPage(){
         waitForElement(next,webDriver,2);
         clickOnElement(next);
         return this;
     }
 
-    private CalendarP goToPreviousCallendarPage(){
+    private CalendarPage goToPreviousCalendarPage(){
         waitForElement(previous,webDriver,2);
         clickOnElement(previous);
         return this;
     }
 
-    private CalendarP goToTodayCallendarPage(){
+    private CalendarPage goToTodayCalendarPage(){
         waitForElement(today,webDriver,2);
         clickOnElement(today);
         return this;
     }
 
-    private CalendarP chooseWeekSection(){
+    private CalendarPage chooseWeekSection(){
         waitForElement(week,webDriver,2);
         clickOnElement(week);
-        if( viewType
+        if( !(viewType
                 .getText()
                 .trim()
-                .equalsIgnoreCase(weekView))
+                .equalsIgnoreCase(weekView)))
+            throw new InvalidElementStateException("Problem with switching to week section");
             // TODO more determinism - throw exception or remove this
-            System.out.println("Some problem occurs in switching between month/week");
         return this;
     }
 
-    private CalendarP chooseMonthSection(){
+    private CalendarPage chooseMonthSection(){
         waitForElement(month,webDriver,2);
         clickOnElement(month);
-        if( viewType
+        if( !(viewType
                 .getText()
                 .trim()
-                .equalsIgnoreCase(monthView))
-            System.out.println("Some problem occurs in switching between month/week");
+                .equalsIgnoreCase(monthView)))
+            throw new InvalidElementStateException("Problem with switching to month section");
         return this;
     }
-
-    /*
-    private boolean checkIfEventDisplayed (String typeOfEvent, String name, String day, String month, String eventTime){
-        if(typeOfEvent.equalsIgnoreCase(job) && monthNavigation(day, month)){
-            System.out.println("a job has been found");
-            return true;
-        } else if(typeOfEvent.equalsIgnoreCase(appointment)){
-            return monthNavigation(day, month);
-        }else if (typeOfEvent.equalsIgnoreCase(extraShoot)){
-            return monthNavigation(day, month);
-        }else {
-            return false;
-        }
-    }
-    */
-
+ 
+    // TODO simplify
     private void monthNavigation(String day, String month) {
         if (c.get(Calendar.MONTH) == getMonthNumber(month)) {
             for (WebElement finder : daysFromCurrentMonth) {
@@ -209,7 +192,7 @@ public class CalendarP extends Page {
             }
         } else if (c.get(Calendar.MONTH) > getMonthNumber(month)) {
             for (int i = c.get(Calendar.MONTH) - getMonthNumber(month) ; i > 0 ; i--) {
-                goToPreviousCallendarPage();
+                goToPreviousCalendarPage();
             }
             for (WebElement finder : daysFromCurrentMonth) {
                 if (finder.findElement(By.xpath(".//td[contains(@class, 'td-head')]/div")).getText().equalsIgnoreCase(day)) {
@@ -218,7 +201,7 @@ public class CalendarP extends Page {
             }
         } else if (c.get(Calendar.MONTH) < getMonthNumber(month)) {
             for (int i = (getMonthNumber(month) - c.get(Calendar.MONTH)); i > 0; i--) {
-                goToNextCallendarPage();
+                goToNextCalendarPage();
             }
             for (WebElement finder : daysFromCurrentMonth) {
                 if (finder.findElement(By.xpath(".//td[contains(@class, 'td-head')]/div")).getText().equalsIgnoreCase(day)) {
@@ -252,20 +235,19 @@ public class CalendarP extends Page {
                     .trim()
                     .equalsIgnoreCase(beforeMonth);
         }else {
-            System.out.println("Wrong position");
-            return false;
+            throw new IndexOutOfBoundsException("monthType value incompatible with conditions");
         }
     }
 
     public void checkNavigation(){
-        goToNextCallendarPage().checkMonthLabel(1);
-        goToTodayCallendarPage().checkMonthLabel(0);
-        goToPreviousCallendarPage().checkMonthLabel(-1);
+        goToNextCalendarPage().checkMonthLabel(1);
+        goToTodayCalendarPage().checkMonthLabel(0);
+        goToPreviousCalendarPage().checkMonthLabel(-1);
 
         chooseWeekSection()
-                .goToNextCallendarPage()
-                .goToTodayCallendarPage()
-                .goToPreviousCallendarPage()
+                .goToNextCalendarPage()
+                .goToTodayCalendarPage()
+                .goToPreviousCalendarPage()
                 .chooseMonthSection();
     }
 

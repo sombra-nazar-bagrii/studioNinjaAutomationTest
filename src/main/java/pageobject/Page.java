@@ -27,18 +27,23 @@ import java.util.concurrent.TimeUnit;
  */
 
 public abstract class Page {
+
     protected WebDriver webDriver;
     protected String tempEmail;
-    FileInputStream file;
-    Properties property = new Properties();
-
     protected static final String HOME_URL = "https://stdn.pp.ua/";
-    protected final String CLIENT_NAME = "Client";
+    protected static final String CLIENT_NAME = "Client";
     protected final boolean modalsWithCC = true;
     protected final String ERROR_TYPE = "error";
     protected final String SUCCESS_TYPE = "success";
     protected final String INFO_TYPE = "info";
     protected final String WARNING_TYPE = "warning";
+    protected static final String DASHBOARD_PAGE = "Dashboard";
+    protected static final String CLIENT_OVERVIEW_PAGE = "Clients overview";
+    protected static final String JOBS_OVERVIEW_PAGE = "Jobs Overview";
+    protected static final String CLIENT_SEND_MODAL = "Send email to client";
+    protected static final String CALENDAR_BUTTON = "Calendar button";
+    protected static final String CALENDAR_WEEK_SECTION = "Calendar week section";
+    protected static final String CALENDAR_MONTH_SECTION = "Calendar month section";
 
     @FindBy(xpath = "//div[contains(@id,'taTextElement')]/p")
     private WebElement angularFirstP;
@@ -115,13 +120,6 @@ public abstract class Page {
         ((JavascriptExecutor)webDriver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<String>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
-        /*
-        webDriver.findElement(By.cssSelector("body")).sendKeys(Keys.COMMAND + "t");
-        for (String winHandle : webDriver.getWindowHandles()) {
-            System.out.println(winHandle);
-            webDriver.switchTo().window(winHandle);
-        }
-        */
         webDriver.get(URL);
     }
 
@@ -207,7 +205,14 @@ public abstract class Page {
     protected void waitForElements(By locator, WebDriver driver, int seconds){
         WebDriverWait wait = new WebDriverWait(driver,seconds);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+
     }
+
+    protected void waitWhileTrue(Boolean condition, WebDriver driver, int seconds){
+        WebDriverWait wait = new WebDriverWait(driver,seconds);
+        wait.until((driver1) -> condition);
+    }
+
 
     protected void titleMessageCheck(String title, String message){
             Assert.assertTrue(getTosterTitle().equals(title));

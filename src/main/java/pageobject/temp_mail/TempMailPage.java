@@ -1,6 +1,5 @@
 package pageobject.temp_mail;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,15 +7,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobject.Page;
-import pageobject.singIn.SingIn;
-import pageobject.singUp.SingUp;
+import pageobject.singIn.SingInPage;
+import pageobject.singUp.SingUpPage;
 
 
 /**
  * Created by sombra-15 on 11.08.17.
  */
 
-public class TempMail extends Page {
+public class TempMailPage extends Page {
 
     @FindBy(xpath = ".//*[@href='/edit']")
     private WebElement editEmail;
@@ -40,7 +39,7 @@ public class TempMail extends Page {
     private WebElement expirationTime;
 
 
-    public TempMail(WebDriver webDriver) {
+    public TempMailPage(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -54,19 +53,19 @@ public class TempMail extends Page {
         return email.getText();
     }
 
-    public SingIn confirmMail(){
+    public SingInPage confirmMail(){
         WebDriverWait wait = new WebDriverWait(webDriver, 120);
         wait.until(ExpectedConditions.elementToBeClickable(mailFromSN));
         hardClick(webDriver, mailFromSN);
         System.out.println(confirmLink.getAttribute("href"));
         webDriver.get(confirmLink.getAttribute("href"));
-        return PageFactory.initElements(webDriver, SingIn.class);
+        return PageFactory.initElements(webDriver, SingInPage.class);
     }
 
-    public SingUp returnNewEMailAndGoBackToSN(){
-        SingUp singUp = PageFactory.initElements(webDriver, SingUp.class);
-        singUp.setTempEmail(email.getAttribute("value"));
-        return singUp;
+    public SingUpPage returnNewEMailAndGoBackToSN(){
+        SingUpPage singUpPage = PageFactory.initElements(webDriver, SingUpPage.class);
+        singUpPage.setTempEmail(email.getAttribute("value"));
+        return singUpPage;
     }
 
 

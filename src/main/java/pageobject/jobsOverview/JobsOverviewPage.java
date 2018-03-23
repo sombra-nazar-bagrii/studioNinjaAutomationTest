@@ -5,12 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pageobject.Page;
-import pageobject.modalForms.AddNewJobMo;
+import pageobject.modalForms.AddNewJobModal;
 
 /**
  * Created by sombra-15 on 12.07.17.
  */
-public class JobsOverview extends Page {
+public class JobsOverviewPage extends Page {
 
     @FindBy(xpath = ".//*[@data-autotest-button='addNewJob']")
     private WebElement addNewJobButton;
@@ -27,14 +27,14 @@ public class JobsOverview extends Page {
     @FindBy(xpath = "")
     private WebElement
 */
-    public JobsOverview(WebDriver webDriver) {
+    public JobsOverviewPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public AddNewJobMo addNewJob (){
+    public AddNewJobModal addNewJob (){
         waitForElement(addNewJobButton, webDriver, 10);
         clickOnElement(addNewJobButton);
         sleepThread(2000);
-        return PageFactory.initElements(webDriver, AddNewJobMo.class);
+        return PageFactory.initElements(webDriver, AddNewJobModal.class);
     }
 }

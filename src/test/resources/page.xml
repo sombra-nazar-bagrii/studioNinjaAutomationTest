@@ -5,8 +5,8 @@
     <test name="TestLQAS" preserve-order="true">
         <classes>
             <class name="tests.CreateUser"/>
-            <!--<class name="tests.CreateClient"/>-->
-            <!--<class name="tests.CreatingJob.CreatingJobFromDashboard"/>-->
+            <class name="tests.CreateClient"/>
+            <class name="tests.CreatingJob.CreatingJobFromDashboard"/>
             <!--<class name="tests.CreatingLead.CreatingLeadFromDashboard"/>-->
             <!--<class name="tests.CreatingJob.CreatingJobFromClientOverview"/>-->
             <!--<class name="tests.CreatingJob.CreatingJobFromSendEmail"/>-->
