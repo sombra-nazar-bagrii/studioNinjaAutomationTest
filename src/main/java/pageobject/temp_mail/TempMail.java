@@ -58,6 +58,7 @@ public class TempMail extends Page {
         WebDriverWait wait = new WebDriverWait(webDriver, 120);
         wait.until(ExpectedConditions.elementToBeClickable(mailFromSN));
         hardClick(webDriver, mailFromSN);
+        System.out.println(confirmLink.getAttribute("href"));
         webDriver.get(confirmLink.getAttribute("href"));
         return PageFactory.initElements(webDriver, SingIn.class);
     }

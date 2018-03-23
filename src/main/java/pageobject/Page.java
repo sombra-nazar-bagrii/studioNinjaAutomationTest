@@ -32,7 +32,7 @@ public abstract class Page {
     FileInputStream file;
     Properties property = new Properties();
 
-    protected static final String HOME_URL = "https://app.studioninja.co/";
+    protected static final String HOME_URL = "https://stdn.pp.ua/";
     protected final String CLIENT_NAME = "Client";
     protected final boolean modalsWithCC = true;
     protected final String ERROR_TYPE = "error";

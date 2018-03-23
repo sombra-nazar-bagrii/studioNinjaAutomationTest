@@ -15,6 +15,7 @@ import pageobject.jobsOverview.SomeJobPage;
 
 public class AddNewJobMo extends Page {
 
+    // TODO static
     private final String CLIENT_NAME = "Client";
 
     @FindBy(css = "[placeholder='Start entering client name']")
@@ -95,6 +96,8 @@ public class AddNewJobMo extends Page {
         // Process of choosing client, we can choose one client or two clients also we check if 'choose client' field empty, because if we click
         // add new job from some client page it will be already configured first client
 
+        // TODO invert equals with constant
+        // TODO split into several methods
         if(fromWhere.equals("clientPage") || fromWhere.equals("clientEmail")){
             if(!(isClientFieldWithValue())){
                 System.out.println("field should be with client name and email info");
@@ -305,6 +308,7 @@ public class AddNewJobMo extends Page {
 
     private void selectCreatedWorkflow() {
         Select createdW = new Select(workflow);
+        // TODO consider throwing RuntimeException
         if (createdW.getOptions().size() == 1)
             System.out.println("Please create some workflow because now only default workflow available");
         else customSelectByIndex(workflow, 1);

@@ -112,12 +112,14 @@ public class Dashboard extends Page {
         }
         clickOnElement(upcomingShoots.get(0));
         waitSomeSec(webDriver, 5);
+        // TODO return isElementDisplayed
         if(isElementDisplayed(webDriver.findElement(By.xpath("(.//*[@id='main-wrapper']//h2)[1]")))){
             return true;
         } else return false;
     }
 
     public boolean checkIfElementDisplayedInUpcomingSection(){
+        // TODO invert
         if(upcomingShoots.get(0).findElement(By.xpath("//span")).getText().equals(JOB_NAME)){
             System.out.println("Job displayed");
             return true;

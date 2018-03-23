@@ -20,10 +20,12 @@ import java.util.*;
 /**
  * Created by sombra-15 on 12.07.17.
  */
-
+// TODO change name to *Page
 public class CalendarP extends Page {
 
+    // TODO use java.time classes
     private Calendar c = Calendar.getInstance();
+    // TODO make static final if not modifiable
     private String beforeMonth = "";
     private String afterMonth = "";
     private String weekView = "Week view";
@@ -31,6 +33,7 @@ public class CalendarP extends Page {
     private String appointment = "Appointment";
     private String job = "Main shoot";
     private String extraShoot = "Extra Shoot";
+    // TODO move to method, because it's not threadsafe
     Random r = new Random();
 
     @FindBy(css = "[ng-click='addNew()']")
@@ -166,6 +169,7 @@ public class CalendarP extends Page {
                 .getText()
                 .trim()
                 .equalsIgnoreCase(weekView))
+            // TODO more determinism - throw exception or remove this
             System.out.println("Some problem occurs in switching between month/week");
         return this;
     }
@@ -291,6 +295,7 @@ public class CalendarP extends Page {
         return list.get(r.nextInt(list.size()));
     }
 
+    // TODO extract this method and others to Utils class
     private int getMonthNumber (String monthName){
         return Month.valueOf(monthName.toUpperCase()).getValue() -1;
     }
