@@ -17,17 +17,16 @@ public class CreateUser extends TestBase {
         Assert.assertTrue(startPage2.checkIfErrorMessageCorrect(EMAIL, PASSWORD));
     }
 
-    @Test (priority = 0, enabled = false)
+    @Test (priority = 0, enabled = true)
     public void verifyIfWeCanRegistrationProcess(){
-        try{
+
             startPage2.openSingUpPage().singUpNewUser();
             System.out.println("Process of registration of new user completed successfully");
-        }catch (Exception e){
             Assert.fail("Failed registration!!");
-        }
+
     }
 
-    @Test (priority = 0, enabled = true)
+    @Test (priority = 0, enabled = false)
     public void logInByExistedUser(){
         try {
             startPage2.enterByExistingUser(EMAIL, PASSWORD);

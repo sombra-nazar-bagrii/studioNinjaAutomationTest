@@ -52,7 +52,7 @@ public class SingUp extends Page {
      private WebElement singUpButton;
 
      private static String TEMP_MAIL = "https://temp-mail.org/uk/";
-     private static String LOGIN_PAGE = "https://snfrankfurt.servehttp.com/login";
+     private static String LOGIN_PAGE = "https://app.studioninja.co/login";
      private static String CURRENCY = "EUR - Euro";
      private static String TIME_ZONE = "(+02:00) Europe - Kiev";
 
@@ -80,17 +80,17 @@ public class SingUp extends Page {
         credentials.add(pass);
         credentials.add(newEmail);
 
-      /*  Integer sum = credentials
-                .stream()
-                .filter(str -> str.contains("a"))
-                .peek(System.out::println)
-                .filter(s -> !Objects.equals(s, "Nazar"))
-                .mapToInt(Integer::valueOf)
-                .flatMap()
-                .sum();
-
-        MyInterface myInterface = something -> "hellow world";
-      */
+//      /*  Integer sum = credentials
+//                .stream()
+//                .filter(str -> str.contains("a"))
+//                .peek(System.out::println)
+//                .filter(s -> !Objects.equals(s, "Nazar"))
+//                .mapToInt(Integer::valueOf)
+//                .flatMap()
+//                .sum();
+//
+//        MyInterface myInterface = something -> "hellow world";
+//      */
     }
 
     public Dashboard singUpNewUser(){

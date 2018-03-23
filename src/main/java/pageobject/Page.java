@@ -108,12 +108,8 @@ public abstract class Page {
     }
 
     protected void openNewWindow(String URL){
-        webDriver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "n");
-        for (String winHandle : webDriver.getWindowHandles()) {
-            System.out.println(winHandle);
-            webDriver.switchTo().window(winHandle);
-        }
-        webDriver.get(URL);
+        ((JavascriptExecutor) webDriver).executeScript("window.open('"+URL+"','New Tab','');");
+        webDriver.switchTo().window(new ArrayList<String>(webDriver.getWindowHandles()).get(1));
     }
 
     protected void openNextTab(){
