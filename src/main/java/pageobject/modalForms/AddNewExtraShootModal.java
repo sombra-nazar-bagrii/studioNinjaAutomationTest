@@ -1,7 +1,7 @@
 package pageobject.modalForms;
 
 import org.openqa.selenium.WebDriver;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 
 /**
  * Created by sombra-15 on 08.09.17.

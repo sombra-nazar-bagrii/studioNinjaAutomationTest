@@ -42,7 +42,7 @@ public class Navigation extends TestBase {
     }
 
     @Test (priority = 3)
-    public void checkDashboardHeaderNavi(){
+    public void checkDashboardHeaderNavigation(){
         startPage
                 .goToDashboard()
                 .checkAllStatesOfHeaderDropBoxes();

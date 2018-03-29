@@ -1,17 +1,19 @@
 package pageobject.calendar;
 
+import ComfigurationClasses.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 import pageobject.modalForms.AddNewAppointmentModal;
 import pageobject.modalForms.AddNewExtraShootModal;
 import pageobject.modalForms.AddNewJobModal;
 
 import java.time.Month;
+import java.time.MonthDay;
 import java.util.*;
 
 
@@ -22,12 +24,12 @@ import java.util.*;
 public class CalendarPage extends Page {
 
     // TODO use java.time classes
-    private Calendar c = Calendar.getInstance();
+    private Date date = new Date();
     // TODO make static final if not modifiable
     private String beforeMonth = "";
     private String afterMonth = "";
-    private String weekView = "Week view";
-    private String monthView = "Month view";
+    private static final String weekView = "Week view";
+    private static final String monthView = "Month view";
 
     // TODO move to method, because it's not threadsafe
     Random r = new Random();
@@ -95,16 +97,16 @@ public class CalendarPage extends Page {
 
 
     public AddNewJobModal createNewJobUsingButton (){
-        waitForElement(addNew, webDriver, 10);
         addNew.click();
         sleepThread(10000);
         waitForElement(addJob, webDriver, 10);
         clickOnElement(addJob);
         return PageFactory.initElements(webDriver, AddNewJobModal.class);
     }
+
     public AddNewJobModal createNewJobUsingMonthSection(String month){
         waitForElement(addNew, webDriver, 10);
-        monthNavigation(getRandDate(), month);
+        monthNavigation(Utility.getRandDate(), month);
         clickOnElement(addJob);
         waitForElement(newJobModal, webDriver, 7);
         return PageFactory.initElements(webDriver, AddNewJobModal.class);
@@ -184,14 +186,14 @@ public class CalendarPage extends Page {
  
     // TODO simplify
     private void monthNavigation(String day, String month) {
-        if (c.get(Calendar.MONTH) == getMonthNumber(month)) {
+        if (date.getMonth() == Utility.getMonthNumber(month)) {
             for (WebElement finder : daysFromCurrentMonth) {
                 if (finder.findElement(By.xpath(".//td[contains(@class, 'td-head')]/div")).getText().equalsIgnoreCase(day)) {
                     clickOnElement(finder.findElement(By.xpath("./table")));
                 }
             }
-        } else if (c.get(Calendar.MONTH) > getMonthNumber(month)) {
-            for (int i = c.get(Calendar.MONTH) - getMonthNumber(month) ; i > 0 ; i--) {
+        } else if (date.getMonth() > Utility.getMonthNumber(month)) {
+            for (int i = date.getMonth() - Utility.getMonthNumber(month) ; i > 0 ; i--) {
                 goToPreviousCalendarPage();
             }
             for (WebElement finder : daysFromCurrentMonth) {
@@ -199,8 +201,8 @@ public class CalendarPage extends Page {
                     clickOnElement(finder.findElement(By.xpath("./table")));
                 }
             }
-        } else if (c.get(Calendar.MONTH) < getMonthNumber(month)) {
-            for (int i = (getMonthNumber(month) - c.get(Calendar.MONTH)); i > 0; i--) {
+        } else if (date.getMonth() < Utility.getMonthNumber(month)) {
+            for (int i = (Utility.getMonthNumber(month) - date.getMonth()); i > 0; i--) {
                 goToNextCalendarPage();
             }
             for (WebElement finder : daysFromCurrentMonth) {
@@ -216,6 +218,7 @@ public class CalendarPage extends Page {
     0 / current month
     1 - next month
      */
+
     private boolean checkMonthLabel(int monthType){
         getMonthValues();
         if (monthType == 1) {
@@ -228,7 +231,7 @@ public class CalendarPage extends Page {
                     .getText()
                     .trim()
                     .equalsIgnoreCase(
-                            c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH));
+                            Month.of(date.getMonth() + 1).toString());
         }else if (monthType == -1){
             return monthLabel
                     .getText()
@@ -252,25 +255,11 @@ public class CalendarPage extends Page {
     }
 
     private void getMonthValues() {
-        Map<String, Integer> displayNames = Calendar.getInstance().getDisplayNames(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
-        String currentName =  Calendar.getInstance().getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
-        Integer currentMonthNumber = displayNames.get(currentName);
+        Integer currentMonthNumber = date.getMonth() + 1;
         Integer beforeMonthNumber = currentMonthNumber != 0 ? currentMonthNumber - 1 : 12;
         Integer afterMonthNumber = currentMonthNumber != 12 ? currentMonthNumber + 1 : 0;
-
-        for(Map.Entry<String, Integer> entry : displayNames.entrySet()){
-            if (entry.getValue().equals(beforeMonthNumber)){
-                beforeMonth = entry.getKey();
-            }
-            if (entry.getValue().equals(afterMonthNumber)){
-                afterMonth = entry.getKey();
-            }
-        }
-    }
-
-    private String getRandDate(){
-        Integer i = r.nextInt(28) +1;
-        return i.toString();
+        beforeMonth = Month.of(beforeMonthNumber).toString();
+        afterMonth = Month.of(afterMonthNumber).toString();
     }
 
     private WebElement chooseJobTime(List<WebElement> list){
@@ -278,10 +267,6 @@ public class CalendarPage extends Page {
     }
 
     // TODO extract this method and others to Utils class
-    private int getMonthNumber (String monthName){
-        return Month.valueOf(monthName.toUpperCase()).getValue() -1;
-    }
-
 }
 
 

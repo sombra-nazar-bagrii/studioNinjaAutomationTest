@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 import pageobject.singIn.SingInPage;
 import pageobject.singUp.SingUpPage;
 

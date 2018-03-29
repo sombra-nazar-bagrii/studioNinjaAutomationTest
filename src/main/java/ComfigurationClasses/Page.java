@@ -1,22 +1,16 @@
-package pageobject;
+package ComfigurationClasses;
 
-import Factory.Messages;
+import ComfigurationClasses.Messages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageobject.header.Header;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -211,12 +205,6 @@ public abstract class Page {
     protected void waitWhileTrue(Boolean condition, WebDriver driver, int seconds){
         WebDriverWait wait = new WebDriverWait(driver,seconds);
         wait.until((driver1) -> condition);
-    }
-
-
-    protected void titleMessageCheck(String title, String message){
-            Assert.assertTrue(getTosterTitle().equals(title));
-            Assert.assertTrue(getTosterMessage().equals(message));
     }
 
     protected void isTextAreTheSame(String actual, String expected){

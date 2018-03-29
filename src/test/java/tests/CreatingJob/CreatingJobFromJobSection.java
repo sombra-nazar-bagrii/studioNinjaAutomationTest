@@ -1,7 +1,6 @@
 package tests.CreatingJob;
 
-import Factory.JobConfigurationFactory;
-import Factory.Messages;
+import ComfigurationClasses.JobConfigurationFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

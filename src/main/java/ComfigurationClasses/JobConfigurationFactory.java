@@ -1,6 +1,4 @@
-package Factory;
-
-import pageobject.JobConfiguration;
+package ComfigurationClasses;
 
 /**
  * Created by sombra-15 on 15.09.17.

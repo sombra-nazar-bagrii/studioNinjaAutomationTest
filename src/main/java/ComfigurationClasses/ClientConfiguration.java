@@ -1,4 +1,4 @@
-package pageobject;
+package ComfigurationClasses;
 
 import java.util.*;
 

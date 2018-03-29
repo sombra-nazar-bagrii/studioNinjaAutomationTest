@@ -1,4 +1,4 @@
-package Factory;
+package ComfigurationClasses;
 
 /**
  * Created by sombramac-8 on 12/25/17.

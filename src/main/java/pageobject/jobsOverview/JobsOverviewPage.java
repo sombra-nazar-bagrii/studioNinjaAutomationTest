@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 import pageobject.modalForms.AddNewJobModal;
 
 /**
@@ -20,13 +20,7 @@ public class JobsOverviewPage extends Page {
 
     @FindBy(xpath = ".//*[@ng-model='selectActiveJobs']")
     private WebElement selectActiveJob;
-/*
-    @FindBy(xpath = "")
-    private WebElement
 
-    @FindBy(xpath = "")
-    private WebElement
-*/
     public JobsOverviewPage(WebDriver webDriver) {
         super(webDriver);
     }

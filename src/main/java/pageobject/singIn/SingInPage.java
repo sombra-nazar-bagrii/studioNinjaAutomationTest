@@ -1,11 +1,12 @@
 package pageobject.singIn;
 
 import org.openqa.selenium.InvalidArgumentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 import pageobject.forgotPassword.ForgotPasswordPage;
 import pageobject.singUp.SingUpPage;
 import static java.lang.System.*;
@@ -50,13 +51,8 @@ public class SingInPage extends Page {
         {
             clickOnElement(staySignedIn);
         }
-        clickOnElement(staySignedIn);
-         try {
             singInButton.click();
-            Thread.sleep(4000);
-        } catch (Exception e){
-             throw new InvalidArgumentException("Invalid user details");
-        }
+            sleepThread(4000);
     }
 
     public boolean checkIfErrorMessageCorrect(String mail, String pass){
@@ -64,12 +60,10 @@ public class SingInPage extends Page {
         customClearAndSendValue(password, pass + 'q');
         singInButton.click();
         if (isToasterValid(getTosterTitle(), getTosterMessage(), ERROR_TYPE)) {
-            out.println("Error message valid!");
             return true;
         }
         else{
-            out.println("Error message invalid!");
-            return false;
+            throw new NoSuchElementException("Message about invalid user's credentials invalid");
         }
     }
 

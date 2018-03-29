@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 import pageobject.clients.ClientsOverviewPage;
 import pageobject.dashboard.DashboardPage;
 import pageobject.jobsOverview.JobsOverviewPage;
-import pageobject.settings.SettingsPage;
+import pageobject.settings.SettingsGeneralPage;
 import pageobject.calendar.CalendarPage;
 import pageobject.payments.PaymentsOverviewPage;
 import pageobject.singIn.SingInPage;
@@ -55,10 +55,10 @@ public class Header extends Page {
         super(webDriver);
     }
 
-    public SettingsPage goToSettingsSection(){
+    public SettingsGeneralPage goToSettingsSection(){
         waitForElement(settings,webDriver,10);
         clickOnElement(settings);
-        return PageFactory.initElements(webDriver,SettingsPage.class);
+        return PageFactory.initElements(webDriver,SettingsGeneralPage.class);
     }
 
     public ClientsOverviewPage goToClientsSection(){

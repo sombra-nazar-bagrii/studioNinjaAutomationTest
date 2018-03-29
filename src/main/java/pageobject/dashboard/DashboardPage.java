@@ -1,12 +1,13 @@
 package pageobject.dashboard;
 
-import Factory.JobConfigurationFactory;
+import ComfigurationClasses.JobConfigurationFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 import pageobject.modalForms.AddNewAppointmentModal;
 import pageobject.modalForms.AddNewExtraShootModal;
 import pageobject.modalForms.AddNewJobModal;
@@ -116,41 +117,12 @@ public class DashboardPage extends Page {
     public boolean checkIfElementDisplayedInUpcomingSection(){
         // TODO invert
         if(JOB_NAME.equals(upcomingShoots.get(0).findElement(By.xpath("//span")).getText())){
-            System.out.println("Job displayed");
             return true;
         }else {
-            System.out.println("Job doesn't display");
-            return false;
+            throw new NoSuchElementException("Job doesn't display at dashboard");
         }
     }
 
-
-
-/*
-    public boolean checkIfUpcomingSectionWorksAppointmet(String appName){
-    if (isElementDisplayed(noUpcomingLabel)){
-
-        waitSomeSec(webDriver, 5);
-        returnHeader()
-                .goToDashboard();
-    }
-
-    public boolean checkIfUpcomingSectionWorksExtraShoot(String es){
-    if (isElementDisplayed(noUpcomingLabel)){
-
-        waitSomeSec(webDriver, 5);
-        returnHeader()
-                .goToDashboard();
-    }
-
-    public boolean checkIfJobWorkflowSectionWorks(){
-
-    }
-
-    public boolean checkIfPaymentSectionWorks(){
-
-    }
-*/
     public void checkAllStatesOfHeaderDropBoxes(){
         checkAllSelectedOptions(leadsSelect);
         checkAllSelectedOptions(acceptedSelect);

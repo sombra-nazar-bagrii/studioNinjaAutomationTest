@@ -3,7 +3,7 @@ package pageobject.clients;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 import pageobject.modalForms.AddNewClientModal;
 
 import java.util.List;
@@ -64,10 +64,6 @@ public class ClientsOverviewPage extends Page {
     public ClientProfilePage goToSomeClientPage(){
         openPage(".//*[@sn-text = 'View']");
         return PageFactory.initElements(webDriver, ClientProfilePage.class);
-    }
-
-    public void EditClientInfo(){
-        //
     }
 
     private void openPage(final String path){

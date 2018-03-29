@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
  */
 
 public class CreateUser extends TestBase {
-    private static String EMAIL = "nazar.bagrii@sombrainc.com";
+    private static String EMAIL = "studioninjatest@gmail.com";
     private static String PASSWORD = "qweqwe";
     private static boolean STAYSIGNED = true;
 

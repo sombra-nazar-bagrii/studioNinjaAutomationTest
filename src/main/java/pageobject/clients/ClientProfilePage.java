@@ -3,8 +3,8 @@ package pageobject.clients;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import Factory.JobConfigurationFactory;
-import pageobject.Page;
+import ComfigurationClasses.JobConfigurationFactory;
+import ComfigurationClasses.Page;
 import pageobject.jobsOverview.JobProfilePage;
 import pageobject.modalForms.AddNewClientModal;
 import pageobject.modalForms.AddNewJobModal;
@@ -121,7 +121,8 @@ public class ClientProfilePage extends Page {
         if (jobs.size() == 0){
             addNewJob()
                     .createNewJob(
-                    JobConfigurationFactory.getConfiguration("conf1"),
+                    JobConfigurationFactory
+                            .getConfiguration("conf1"),
                     "Job from client page", "clientPage");
         }
         return PageFactory.initElements(webDriver, JobProfilePage.class);

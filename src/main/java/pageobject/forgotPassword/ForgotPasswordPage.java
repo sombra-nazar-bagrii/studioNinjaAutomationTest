@@ -3,7 +3,7 @@ package pageobject.forgotPassword;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 
 /**
  * Created by sombra-15 on 09.08.17.

@@ -1,7 +1,7 @@
 package pageobject.payments;
 
 import org.openqa.selenium.WebDriver;
-import pageobject.Page;
+import ComfigurationClasses.Page;
 
 /**
  * Created by sombra-15 on 12.07.17.

@@ -1,6 +1,6 @@
 package tests.CreatingLead;
 
-import Factory.JobConfigurationFactory;
+import ComfigurationClasses.JobConfigurationFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

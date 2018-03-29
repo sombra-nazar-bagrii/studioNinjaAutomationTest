@@ -1,6 +1,6 @@
 package tests.CreatingJob;
 
-import Factory.JobConfigurationFactory;
+import ComfigurationClasses.JobConfigurationFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,13 +16,16 @@ public class CreatingJobFromCalendar extends TestBase {
     @DataProvider
     public Object[][] getJobPositiveConfig(){
         return new Object[][]{
-                {"JobConf1", "Test 1."},
-                {"JobConf2", "Test 2."},
-                {"JobConf3", "Test 3."},
-                {"JobConf4", "Test 4."},
-                {"JobConf5", "Test 5."},
-                {"JobConf6", "Test 6."},};
+                {"JobConf1", "Test 5.1"},
+                {"JobConf2", "Test 5.2"},
+                {"JobConf3", "Test 5.3"},
+                {"JobConf4", "Test 5.4"},
+                {"JobConf5", "Test 5.5"},
+                {"JobConf6", "Test 5.6"},};
     }
+    /*
+    Job created using button on calendar page -
+    */
 
     @Test(dataProvider = "getJobPositiveConfig", priority = 1)
     public void jobsFromCalendarPagePos(String configType, String jobName){
@@ -30,7 +33,7 @@ public class CreatingJobFromCalendar extends TestBase {
                 .createNewJobUsingButton()
                 .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
-                        jobName + '4',
+                        jobName + ".1",
                         CALENDAR_BUTTON);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
@@ -41,7 +44,7 @@ public class CreatingJobFromCalendar extends TestBase {
                 .createNewJobUsingMonthSection(month)
                 .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
-                        jobName + '5',
+                        jobName + ".2",
                         CALENDAR_MONTH_SECTION);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
@@ -52,7 +55,7 @@ public class CreatingJobFromCalendar extends TestBase {
                 .createNewJobUsingWeekSection()
                 .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
-                        jobName + '6',
+                        jobName + ".3",
                         CALENDAR_WEEK_SECTION);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
@@ -60,12 +63,12 @@ public class CreatingJobFromCalendar extends TestBase {
     @DataProvider
     public Object[][] getJobNegativeConf(){
         return new Object[][]{
-                {"JobConf7", "Test 7."},
+                {"JobConf7", "Test 5.7"},
                 {"JobConf8", ""},
-                {"JobConf9", "Test 9."},
-                {"JobConf10", "Test 10."},
-                {"JobConf11", "Test 11."},
-                {"JobConf12", "Test 12."},};
+                {"JobConf9", "Test 5.9"},
+                {"JobConf10", "Test 5.10"},
+                {"JobConf11", "Test 5.11"},
+                {"JobConf12", "Test 5.12"},};
     }
     @Test(dataProvider = "getJobNegativeConf", priority = 2)
     public void jobsFromCalendarPageNeg (String configType, String jobName){
@@ -73,7 +76,7 @@ public class CreatingJobFromCalendar extends TestBase {
                 .createNewJobUsingButton()
                 .createNewJob(
                         JobConfigurationFactory.getConfiguration(configType),
-                        jobName + '4',
+                        jobName,
                         CALENDAR_BUTTON);
         Assert.assertTrue(startPage.checkMessageForCase(configType));
     }
@@ -81,7 +84,7 @@ public class CreatingJobFromCalendar extends TestBase {
     @DataProvider
     public Object[][] getJobNegativeConfM(){
         return new Object[][]{
-                {"JobConf7", "Test 7."},
+                {"JobConf7", "Test 67"},
                 {"JobConf8", ""},
                 {"JobConf10", "Test 10."},
                 {"JobConf11", "Test 11."},

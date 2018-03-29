@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pageobject.ClientConfiguration;
-import pageobject.Page;
+import ComfigurationClasses.ClientConfiguration;
+import ComfigurationClasses.Page;
 import pageobject.clients.ClientsOverviewPage;
 import pageobject.clients.ClientProfilePage;
 
@@ -53,14 +53,6 @@ public class AddNewClientMoLead extends Page {
 
     @FindBy(css = "([ng-model='html'])[2]")
     private WebElement notesFromJob;
-
-    /*
-    @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[2]")
-    private WebElement notesFromJob;
-
-    @FindBy(xpath = "(.//*[starts-with(@id, 'taTextElement')])[2]")
-    private WebElement notesFromJob;
-    */
 
     @FindBy(xpath = "(.//*[@ng-model='client.companyName'])[2]")
     private WebElement company;

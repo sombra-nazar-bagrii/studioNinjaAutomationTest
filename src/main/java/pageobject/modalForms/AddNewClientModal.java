@@ -5,11 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import pageobject.ClientConfiguration;
-import pageobject.Page;
+import ComfigurationClasses.ClientConfiguration;
+import ComfigurationClasses.Page;
 import pageobject.clients.ClientsOverviewPage;
-import pageobject.clients.ClientProfilePage;
 
 import java.util.Arrays;
 import java.util.List;

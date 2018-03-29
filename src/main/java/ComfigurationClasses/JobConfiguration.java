@@ -1,4 +1,4 @@
-package pageobject;
+package ComfigurationClasses;
 
 /**
  * Created by sombra-15 on 15.09.17.
@@ -8,7 +8,7 @@ public class JobConfiguration {
     private  String createOrExisted;
     private  String typeOfJobDuration;
     private  String typeOfWorkflow;
-    private String CLIENT_NAME = "Test";
+    private String CLIENT_NAME = "Client";
     private boolean modalsWithCC = true;
 
     public JobConfiguration(){

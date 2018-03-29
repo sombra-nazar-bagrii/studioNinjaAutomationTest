@@ -1,6 +1,6 @@
 package tests;
 
-import Factory.WebDriverFactory;
+import ComfigurationClasses.WebDriverFactory;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,7 +13,6 @@ import pageobject.singIn.SingInPage;
 
 import java.io.*;
 import java.util.Arrays;
-import java.util.Properties;
 
 /**
  * Created by sombra17 on 09.12.16.
@@ -34,8 +33,7 @@ public class TestBase {
     @BeforeSuite
     public void init(String browserName) throws Exception {
         webDriver = WebDriverFactory.getInstance(browserName);
-        System.setProperty("java.awt.headless", "false");
-        webDriver.get("https://app.studioninja.co/login");
+        webDriver.get("https://stdn.pp.ua/login");
     }
     @BeforeMethod
     public void includeExclude(){
@@ -50,7 +48,7 @@ public class TestBase {
             FileUtils.copyFile(scrFile, new File("errorScreenshots\\" + testResult.getName() + "-"
                     + Arrays.toString(testResult.getParameters()) + ".jpg"));
         }
-        webDriver.get("https://app.studioninja.co");
+        webDriver.get("https://stdn.pp.ua");
     }
     @AfterSuite
     public void afterSuiteMethod(){
