@@ -28,12 +28,13 @@ public class TestBase {
     protected static final String CALENDAR_BUTTON = "Calendar button";
     protected static final String CALENDAR_WEEK_SECTION = "Calendar week section";
     protected static final String CALENDAR_MONTH_SECTION = "Calendar month section";
+    protected static final String URL = "https://stdn.pp.ua";
 
     @Parameters({ "browserName" })
     @BeforeSuite
     public void init(String browserName) throws Exception {
         webDriver = WebDriverFactory.getInstance(browserName);
-        webDriver.get("https://stdn.pp.ua/login");
+        webDriver.get(URL + "/login");
     }
     @BeforeMethod
     public void includeExclude(){
@@ -48,7 +49,7 @@ public class TestBase {
             FileUtils.copyFile(scrFile, new File("errorScreenshots\\" + testResult.getName() + "-"
                     + Arrays.toString(testResult.getParameters()) + ".jpg"));
         }
-        webDriver.get("https://stdn.pp.ua");
+        webDriver.get(URL);
     }
     @AfterSuite
     public void afterSuiteMethod(){
