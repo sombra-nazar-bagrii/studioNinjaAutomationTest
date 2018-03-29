@@ -17,7 +17,7 @@ public class ClientConfiguration {
     private static final List<String> country = Arrays.asList("Ukraine", "Au", "Poland");
     private static final List<String> notes = Arrays.asList("bla bla bla", "Some notes");
 
-    static Random rand = new Random();
+    private static Random rand = new Random();
 
     public ClientConfiguration() {
     }
