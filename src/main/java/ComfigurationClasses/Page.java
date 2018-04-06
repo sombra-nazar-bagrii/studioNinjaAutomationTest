@@ -22,15 +22,23 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Page {
 
+	// TODO make final
     protected WebDriver webDriver;
+    
+    // TODO move to subclass where it's needed
     protected String tempEmail;
+    
     protected static final String HOME_URL = "https://stdn.pp.ua/";
     protected static final String CLIENT_NAME = "Client";
-    protected final boolean modalsWithCC = true;
+    
+    // TODO make constants and move to constants class
+    protected final boolean modalsWithCC = true;    
     protected final String ERROR_TYPE = "error";
     protected final String SUCCESS_TYPE = "success";
     protected final String INFO_TYPE = "info";
     protected final String WARNING_TYPE = "warning";
+    
+    // TODO move to constants class
     protected static final String DASHBOARD_PAGE = "Dashboard";
     protected static final String CLIENT_OVERVIEW_PAGE = "Clients overview";
     protected static final String JOBS_OVERVIEW_PAGE = "Jobs Overview";
@@ -88,6 +96,7 @@ public abstract class Page {
     }
 
     private WebElement typeOfMessage(String type){
+    	// TODO reverse equals
         if (type.equalsIgnoreCase(ERROR_TYPE)){
             return tosterError;
         } else if (type.equalsIgnoreCase(SUCCESS_TYPE)){
@@ -123,11 +132,13 @@ public abstract class Page {
         }
     }
 
+    // TODO no need for this method
     protected WebDriver getWebDriver() {
         return webDriver;
     }
 
     protected void openNewWindow(String URL){
+    	// TODO move to getJSExecutor method
         ((JavascriptExecutor)webDriver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<String>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
@@ -144,17 +155,20 @@ public abstract class Page {
         js.executeScript("arguments[0].click();", element);
     }
 
+    // TODO remove unused method
     protected boolean isElementPresent(WebElement element) {
         try {
             element.isEnabled();
             return true;
         } catch (NoSuchElementException e) {
+        	// TODO check if exception could be thrown
             return false;
         }
     }
 
     protected boolean isElementDisplayed(WebElement element) {
         try {
+        	// TODO shos tut ne to :)
             element.isDisplayed();
             return true;
         } catch (NoSuchElementException e) {
@@ -170,11 +184,13 @@ public abstract class Page {
       return element.getAttribute(attribute);
     }
 
+    // TODO consider removing for now
     protected void customSendKeys(WebElement element,String text){
         element.sendKeys(text);
     }
 
-    protected void customClear(WebElement element){element.clear();}
+    // TODO consider removing for now
+    protected void customClear(WebElement element) { element.clear(); }
 
     protected void customClearAndSendValue(WebElement webel, String str){
         waitForElement(webel, webDriver, 5);
@@ -217,15 +233,18 @@ public abstract class Page {
 
     }
 
+    // TODO use boolean instead of Boolean
     protected void waitWhileTrue(Boolean condition, WebDriver driver, int seconds){
         WebDriverWait wait = new WebDriverWait(driver,seconds);
         wait.until((driver1) -> condition);
     }
 
+    // TODO method not needed
     protected void isTextAreTheSame(String actual, String expected){
         Assert.assertTrue(actual.equals(expected));
     }
 
+    // TODO use library
     protected String generateString() {
         char[] arr;
         final Random random = new Random();

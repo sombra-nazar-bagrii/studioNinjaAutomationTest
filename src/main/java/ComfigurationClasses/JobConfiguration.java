@@ -4,10 +4,12 @@ package ComfigurationClasses;
  * Created by sombra-15 on 15.09.17.
  */
 public class JobConfiguration {
+	// TODO remove setters, move to constructor
     private  String numberOfClients;
     private  String createOrExisted;
     private  String typeOfJobDuration;
     private  String typeOfWorkflow;
+    // TODO should be a constant?s
     private String CLIENT_NAME = "Client";
     private boolean modalsWithCC = true;
 

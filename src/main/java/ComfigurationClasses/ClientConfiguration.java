@@ -1,5 +1,7 @@
 package ComfigurationClasses;
 
+import static java.util.Arrays.asList;
+
 import java.util.*;
 
 /**
@@ -7,22 +9,25 @@ import java.util.*;
  */
 public class ClientConfiguration {
 
-    private static final List<String> firstName = Arrays.asList("Test Nazar", "Test Oleh", " Test Tania", "Test Andrew", "Test Vlad", "Test Roksolana", "Test Olia");
-    private static final List<String> lastName = Arrays.asList("Smit", "Ivanov", "Papka", "Batia", "Petrov", "Jones");
-    private static final List<String> phone = Arrays.asList("02589462", "5463156", "8746513", "6987446");
-    private static final List<String> street = Arrays.asList("Pid Dubom", "Zamarstynivska", "Ugorska", "Gorodotska");
-    private static final List<String> town = Arrays.asList("Lviv", "Ivano-F", "Kiev", "London");
-    private static final List<String> postcode = Arrays.asList("87125", "32136");
-    private static final List<String> state = Arrays.asList("Some", "I don't know");
-    private static final List<String> country = Arrays.asList("Ukraine", "Au", "Poland");
-    private static final List<String> notes = Arrays.asList("bla bla bla", "Some notes");
+    private static final List<String> firstName = asList("Test Nazar", "Test Oleh", " Test Tania", "Test Andrew", "Test Vlad", "Test Roksolana", "Test Olia");
+    private static final List<String> lastName = asList("Smit", "Ivanov", "Papka", "Batia", "Petrov", "Jones");
+    private static final List<String> phone = asList("02589462", "5463156", "8746513", "6987446");
+    private static final List<String> street = asList("Pid Dubom", "Zamarstynivska", "Ugorska", "Gorodotska");
+    private static final List<String> town = asList("Lviv", "Ivano-F", "Kiev", "London");
+    private static final List<String> postcode = asList("87125", "32136");
+    private static final List<String> state = asList("Some", "I don't know");
+    private static final List<String> country = asList("Ukraine", "Au", "Poland");
+    private static final List<String> notes = asList("bla bla bla", "Some notes");
 
+    // TODO final
     private static Random rand = new Random();
 
+    // TODO private
     public ClientConfiguration() {
     }
 
     public static String getFirstName() {
+//    	TODO remove duplication
         return firstName.get(rand.nextInt(firstName.size()));
     }
 
@@ -59,7 +64,7 @@ public class ClientConfiguration {
     }
 
     public static List<String> getAllValues() {
-        return Arrays.asList(
+        return asList(
                 getFirstName(),
                 getLastName(),
                 getPhone(),

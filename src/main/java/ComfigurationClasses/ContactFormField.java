@@ -5,6 +5,7 @@ package ComfigurationClasses;
  */
 public class ContactFormField {
 
+	// TODO make final
     private String fieldType;
     private String fieldLable;
     private boolean mandatoryState;
@@ -30,6 +31,7 @@ public class ContactFormField {
         return mandatoryState;
     }
 
+    // TODO remove unused setters
     public ContactFormField setFieldLable(String fieldLable) {
         this.fieldLable = fieldLable;
         return this;

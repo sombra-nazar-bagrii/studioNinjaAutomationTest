@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class ContactFormConfiguration {
 
+	// TODO final
     private List<ContactFormField> fields;
 
     public ContactFormConfiguration() {

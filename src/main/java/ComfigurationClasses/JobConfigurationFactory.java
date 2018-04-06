@@ -27,6 +27,7 @@ public class JobConfigurationFactory {
      12.   1          exist      time before   created
     */
 
+	// TODO use switch statement
     public static JobConfiguration getConfiguration(final String nameConfiguration){
         if ("JobConf1".equals(nameConfiguration)){
             return new JobConfiguration()
@@ -112,6 +113,7 @@ public class JobConfigurationFactory {
                     .setTypeOfJobDuration("time before")
                     .setTypeOfWorkflow("default");
         }
+        // throw exception with unknown configuration value
         else return null;
     }
 }

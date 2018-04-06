@@ -4,19 +4,17 @@ package ComfigurationClasses;
  * Created by sombramac-8 on 4/4/18.
  */
 public class ContactFormFactory {
-    public static ContactFormConfiguration getContactFormConfigurations(final String configName){
+	// TODO use switch statement
+	public static ContactFormConfiguration getContactFormConfigurations(final String configName){
         if ("Contact_Form_Case1".equals(configName)){
             // only Email and First name fields
-        }
-        if ("Contact_Form_Case2".equals(configName)){
+        } else if ("Contact_Form_Case2".equals(configName)){
             return new ContactFormConfiguration()
                     .addMainShootDateField(true);
-        }
-        if ("Contact_Form_Case3".equals(configName)){
+        } else if ("Contact_Form_Case3".equals(configName)){
             return new ContactFormConfiguration()
                     .addMainShootDateField(false);
-        }
-        if ("Contact_Form_Case4".equals(configName)){
+        } else if ("Contact_Form_Case4".equals(configName)){
             return new ContactFormConfiguration()
                     .addJobTypeField(true);
         }
@@ -68,6 +66,7 @@ public class ContactFormFactory {
                     .addOtherField(true)
                     .addPhoneField(true);
         }
+        // TODO throw exception with unknown config name
         else return null;
     }
 }

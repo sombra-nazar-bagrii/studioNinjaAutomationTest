@@ -12,6 +12,7 @@ public enum Messages {
     TWO_THE_SAME_CLIENTS("Oops!", "The secondary client needs to be different from the primary client.", "error"),
     INVALID_TIME("Jetlagged!", "The start time must be before the end date.", "error");
 
+	// TODO make final
     private String title;
     private String message;
     private String type;
