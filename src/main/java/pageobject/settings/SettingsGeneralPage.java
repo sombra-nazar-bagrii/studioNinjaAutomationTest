@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pageobject.settings.settingMenu.*;
+import pageobject.settings.settingMenu.contactForm.ContactFormPage;
 
 /**
  * Created by sombra-15 on 12.07.17.
@@ -91,12 +92,12 @@ public class SettingsGeneralPage extends Page {
         clickOnElement(paymentMethods);
         return PageFactory.initElements(webDriver, PaymentMethodsPage.class);
     }
-/*
-    public PaymentMethodsPage goToPaymentMethodsPage(){
-        clickOnElement(paymentMethods);
-        return PageFactory.initElements(webDriver, PaymentMethodsPage.class);
-    }
 
+    public ContactFormPage goToContractFormPage(){
+        clickOnElement(contractForm);
+        return PageFactory.initElements(webDriver, ContactFormPage.class);
+    }
+/*
     public PaymentMethodsPage goToPaymentMethodsPage(){
         clickOnElement(paymentMethods);
         return PageFactory.initElements(webDriver, PaymentMethodsPage.class);

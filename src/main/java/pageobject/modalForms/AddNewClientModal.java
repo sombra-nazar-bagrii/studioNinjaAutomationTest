@@ -67,7 +67,7 @@ public class AddNewClientModal extends Page {
 
     public ClientsOverviewPage createNewClient() {
         List<WebElement> list = Arrays.asList(firstName, lastName, phone, street, town, postcode, state, country);
-        if (isClientCompany.trim().equalsIgnoreCase("Yes")) {
+        if (isClientCompany.trim().equalsIgnoreCase("Yes") && !clientIsACompanyBox.isSelected()) {
             clickOnElement(clientIsACompanyBox);
             customClearAndSendValue(company, ClientConfiguration.getFirstName());
         }

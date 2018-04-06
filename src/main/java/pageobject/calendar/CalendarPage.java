@@ -32,7 +32,6 @@ public class CalendarPage extends Page {
     private static final String monthView = "Month view";
 
     // TODO move to method, because it's not threadsafe
-    Random r = new Random();
 
     @FindBy(css = "[ng-click='addNew()']")
     private WebElement addNew;
@@ -184,7 +183,6 @@ public class CalendarPage extends Page {
         return this;
     }
  
-    // TODO simplify
     private void monthNavigation(String day, String month) {
         if (date.getMonth() == Utility.getMonthNumber(month)) {
             for (WebElement finder : daysFromCurrentMonth) {
@@ -263,7 +261,8 @@ public class CalendarPage extends Page {
     }
 
     private WebElement chooseJobTime(List<WebElement> list){
-        return list.get(r.nextInt(list.size()));
+        Random random = new Random();
+        return list.get(random.nextInt(list.size()));
     }
 
     // TODO extract this method and others to Utils class

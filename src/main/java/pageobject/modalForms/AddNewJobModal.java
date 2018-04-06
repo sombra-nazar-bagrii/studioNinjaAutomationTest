@@ -126,8 +126,8 @@ public class AddNewJobModal extends Page {
         // Job type
         try {
             customSelectByIndex(jobType, getJobNumber(jobName));
-        }catch (IndexOutOfBoundsException e){
-            customSelectByIndex(jobType, 1);
+        }catch (NoSuchElementException e){
+            customSelectByIndex(jobType, 0);
         }
 
         // Workflow

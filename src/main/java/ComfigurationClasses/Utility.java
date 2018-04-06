@@ -15,6 +15,12 @@ public final class Utility {
         return i.toString();
     }
 
+    public static String getRandNumber(){
+        Random rand = new Random();
+        Integer i = rand.nextInt(98) +1;
+        return i.toString();
+    }
+
     public static int getMonthNumber (String monthName){
         return Month.valueOf(monthName.toUpperCase()).getValue() -1;
     }

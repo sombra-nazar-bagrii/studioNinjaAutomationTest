@@ -38,6 +38,17 @@ public abstract class Page {
     protected static final String CALENDAR_BUTTON = "Calendar button";
     protected static final String CALENDAR_WEEK_SECTION = "Calendar week section";
     protected static final String CALENDAR_MONTH_SECTION = "Calendar month section";
+    // Contact form fields
+    protected static final String CF_FIRST_NAME = "";
+    protected static final String CF_EMAIL = "";
+    protected static final String CF_LAST_NAME = "Last name";
+    protected static final String CF_JOB_TYPE = "Job type*";
+    protected static final String CF_JOB_DATE = "Main shoot date";
+    protected static final String CF_PHONE = "Phone";
+    protected static final String CF_MESSAGE = "Message (answer appears in lead notes)";
+    protected static final String CF_LOCATION = "Job location";
+    protected static final String CF_SOURCE = "Lead source (answer appears in lead notes)";
+    protected static final String CF_OTHER = "Other (answer appears in lead notes)";
 
     @FindBy(xpath = "//div[contains(@id,'taTextElement')]/p")
     private WebElement angularFirstP;
@@ -62,10 +73,6 @@ public abstract class Page {
 
     protected Page(WebDriver webDriver) {
         this.webDriver = webDriver;
-    }
-
-    public String getTempEmail() {
-        return tempEmail;
     }
 
     public void setTempEmail(String tempEmail) {
@@ -94,6 +101,16 @@ public abstract class Page {
         }
     }
 
+    public void scrollToTop(){
+        JavascriptExecutor js = ((JavascriptExecutor) webDriver);
+        js.executeScript("window.scrollTo(0, -document.body.scrollHeight)");
+    }
+
+    public void scrollToDown(){
+        JavascriptExecutor js = ((JavascriptExecutor) webDriver);
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
     public boolean isToasterValid(String title, String message, String type){
         try {
             return getTosterTitle().equalsIgnoreCase(title) &&
@@ -117,19 +134,16 @@ public abstract class Page {
         webDriver.get(URL);
     }
 
-    protected void openNextTab(){
-        String selectLinkOpeninNewTab = Keys.chord(Keys.COMMAND,Keys.TAB);
-        webDriver.findElement(By.cssSelector("body")).sendKeys(selectLinkOpeninNewTab);
-    }
-
     protected void clickOnElement(WebElement element){
         waitForElement(element,webDriver,5);
         element.click();
     }
+
     protected void hardClick(WebDriver driver,WebElement element){
         JavascriptExecutor js = (JavascriptExecutor)driver;
         js.executeScript("arguments[0].click();", element);
     }
+
     protected boolean isElementPresent(WebElement element) {
         try {
             element.isEnabled();
@@ -163,6 +177,7 @@ public abstract class Page {
     protected void customClear(WebElement element){element.clear();}
 
     protected void customClearAndSendValue(WebElement webel, String str){
+        waitForElement(webel, webDriver, 5);
         webel.clear();
         webel.sendKeys(str);
     }
